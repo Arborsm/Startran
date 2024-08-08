@@ -3,32 +3,48 @@
   "WorkspaceRootPath": "D:\\Users\\26537\\RiderProjects\\Startran\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\SettingsForm.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Startran\\SettingsForm.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|d:\\users\\26537\\riderprojects\\startran\\startran\\appconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|solutionrelative:startran\\appconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Users\\26537\\RiderProjects\\Startran\\startran\\settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:startran\\settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|d:\\users\\26537\\riderprojects\\startran\\startran\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|solutionrelative:startran\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Users\\26537\\RiderProjects\\Startran\\startran\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:startran\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|d:\\users\\26537\\riderprojects\\startran\\startran\\settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|solutionrelative:startran\\settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\MainForm.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Startran\\MainForm.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|d:\\users\\26537\\riderprojects\\startran\\startran\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|solutionrelative:startran\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\MainForm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Startran\\MainForm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|d:\\users\\26537\\riderprojects\\startran\\startran\\openaisettingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|solutionrelative:startran\\openaisettingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\Startran.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Startran\\Startran.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|d:\\users\\26537\\riderprojects\\startran\\startran\\openaisettingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|solutionrelative:startran\\openaisettingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\Trans.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Startran\\Trans.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|d:\\users\\26537\\riderprojects\\startran\\startran\\trans.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|solutionrelative:startran\\trans.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|d:\\users\\26537\\riderprojects\\startran\\startran\\settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|solutionrelative:startran\\settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|d:\\users\\26537\\riderprojects\\startran\\startran\\settingsform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|solutionrelative:startran\\settingsform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|d:\\users\\26537\\riderprojects\\startran\\startran\\openaisettingform.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|solutionrelative:startran\\openaisettingform.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|d:\\users\\26537\\riderprojects\\startran\\startran\\mainform.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{80232C36-F0E0-4107-86B0-74C82B0D6840}|Startran\\Startran.csproj|solutionrelative:startran\\mainform.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,78 +54,91 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 6,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SettingsForm.Designer.cs",
-              "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\SettingsForm.Designer.cs",
-              "RelativeDocumentMoniker": "Startran\\SettingsForm.Designer.cs",
-              "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\SettingsForm.Designer.cs",
-              "RelativeToolTip": "Startran\\SettingsForm.Designer.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAkwBMAAAAgAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-07T16:52:25.644Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "SettingsForm.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\SettingsForm.cs",
-              "RelativeDocumentMoniker": "Startran\\SettingsForm.cs",
-              "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\SettingsForm.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "Startran\\SettingsForm.cs [\u8BBE\u8BA1]",
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\MainForm.cs",
+              "RelativeDocumentMoniker": "Startran\\MainForm.cs",
+              "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\MainForm.cs",
+              "RelativeToolTip": "Startran\\MainForm.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAjwBEAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-07T16:52:24.284Z"
+              "WhenOpened": "2024-08-08T14:48:29.097Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OpenAISettingForm.cs",
+              "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\OpenAISettingForm.cs",
+              "RelativeDocumentMoniker": "Startran\\OpenAISettingForm.cs",
+              "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\OpenAISettingForm.cs",
+              "RelativeToolTip": "Startran\\OpenAISettingForm.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAG0AAABMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-08T16:13:52.01Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "SettingsForm.cs",
+              "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\SettingsForm.cs",
+              "RelativeDocumentMoniker": "Startran\\SettingsForm.cs",
+              "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\SettingsForm.cs",
+              "RelativeToolTip": "Startran\\SettingsForm.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-08T16:28:02.564Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "MainForm.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\MainForm.cs",
               "RelativeDocumentMoniker": "Startran\\MainForm.cs",
               "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\MainForm.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "Startran\\MainForm.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-07T16:51:27.391Z"
+              "WhenOpened": "2024-08-08T15:03:11.287Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainForm.Designer.cs",
-              "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\MainForm.Designer.cs",
-              "RelativeDocumentMoniker": "Startran\\MainForm.Designer.cs",
-              "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\MainForm.Designer.cs",
-              "RelativeToolTip": "Startran\\MainForm.Designer.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAAwAAAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "AppConfig.cs",
+              "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\AppConfig.cs",
+              "RelativeDocumentMoniker": "Startran\\AppConfig.cs",
+              "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\AppConfig.cs",
+              "RelativeToolTip": "Startran\\AppConfig.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-07T16:51:16.066Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainForm.cs",
-              "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\MainForm.cs",
-              "RelativeDocumentMoniker": "Startran\\MainForm.cs",
-              "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\MainForm.cs",
-              "RelativeToolTip": "Startran\\MainForm.cs",
-              "ViewState": "AQIAADMAAAAAAAAAAAAuwD8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-07T16:50:44.23Z"
+              "WhenOpened": "2024-08-08T14:53:48.978Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Startran.cs",
-              "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\Startran.cs",
-              "RelativeDocumentMoniker": "Startran\\Startran.cs",
-              "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\Startran.cs",
-              "RelativeToolTip": "Startran\\Startran.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAswAIAAAANAAAA",
+              "Title": "OpenAISettingForm.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\OpenAISettingForm.cs",
+              "RelativeDocumentMoniker": "Startran\\OpenAISettingForm.cs",
+              "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\OpenAISettingForm.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "Startran\\OpenAISettingForm.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-07T16:50:41.769Z"
+              "WhenOpened": "2024-08-08T15:31:21.061Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
             },
             {
               "$type": "Document",
@@ -119,9 +148,63 @@
               "RelativeDocumentMoniker": "Startran\\Trans.cs",
               "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\Trans.cs",
               "RelativeToolTip": "Startran\\Trans.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAgwBAAAAAQAAAA",
+              "ViewState": "AQIAADMAAAAAAAAAAAAowEIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-07T16:50:40.569Z"
+              "WhenOpened": "2024-08-08T14:48:54.466Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SettingsForm.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\SettingsForm.cs",
+              "RelativeDocumentMoniker": "Startran\\SettingsForm.cs",
+              "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\SettingsForm.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "Startran\\SettingsForm.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-08T16:27:46.817Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SettingsForm.Designer.cs",
+              "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\SettingsForm.Designer.cs",
+              "RelativeDocumentMoniker": "Startran\\SettingsForm.Designer.cs",
+              "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\SettingsForm.Designer.cs",
+              "RelativeToolTip": "Startran\\SettingsForm.Designer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-08T14:48:52.04Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "OpenAISettingForm.resx",
+              "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\OpenAISettingForm.resx",
+              "RelativeDocumentMoniker": "Startran\\OpenAISettingForm.resx",
+              "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\OpenAISettingForm.resx",
+              "RelativeToolTip": "Startran\\OpenAISettingForm.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2024-08-08T15:12:23.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "MainForm.resx",
+              "DocumentMoniker": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\MainForm.resx",
+              "RelativeDocumentMoniker": "Startran\\MainForm.resx",
+              "ToolTip": "D:\\Users\\26537\\RiderProjects\\Startran\\Startran\\MainForm.resx",
+              "RelativeToolTip": "Startran\\MainForm.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2024-08-08T14:48:45.854Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         }
