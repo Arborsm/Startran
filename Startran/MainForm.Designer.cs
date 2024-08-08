@@ -1,10 +1,10 @@
 ﻿namespace Startran
 {
-    partial class Form1
+    partial class MainForm
     {
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.TextBox inputTextBox;
-        private System.Windows.Forms.TextBox outputTextBox;
+        internal System.Windows.Forms.TextBox outputTextBox;
         private System.Windows.Forms.TextBox directoryTextBox;
         private System.Windows.Forms.Button translateButton;
         private System.Windows.Forms.Button processButton;
@@ -22,92 +22,113 @@
 
         private void InitializeComponent()
         {
-            this.inputTextBox = new System.Windows.Forms.TextBox();
-            this.outputTextBox = new System.Windows.Forms.TextBox();
-            this.directoryTextBox = new System.Windows.Forms.TextBox();
-            this.translateButton = new System.Windows.Forms.Button();
-            this.processButton = new System.Windows.Forms.Button();
-            this.settingsButton = new System.Windows.Forms.Button();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.SuspendLayout();
+            inputTextBox = new TextBox();
+            outputTextBox = new TextBox();
+            directoryTextBox = new TextBox();
+            translateButton = new Button();
+            processButton = new Button();
+            settingsButton = new Button();
+            progressBar = new ProgressBar();
+            ModsFolderLabel = new Label();
+            SuspendLayout();
             // 
             // inputTextBox
             // 
-            this.inputTextBox.Location = new System.Drawing.Point(12, 40);
-            this.inputTextBox.Multiline = true;
-            this.inputTextBox.Name = "inputTextBox";
-            this.inputTextBox.Size = new System.Drawing.Size(776, 100);
-            this.inputTextBox.TabIndex = 0;
+            inputTextBox.Location = new Point(14, 50);
+            inputTextBox.Margin = new Padding(3, 4, 3, 4);
+            inputTextBox.Multiline = true;
+            inputTextBox.Name = "inputTextBox";
+            inputTextBox.Size = new Size(782, 29);
+            inputTextBox.TabIndex = 0;
             // 
             // outputTextBox
             // 
-            this.outputTextBox.Location = new System.Drawing.Point(12, 228);
-            this.outputTextBox.Multiline = true;
-            this.outputTextBox.Name = "outputTextBox";
-            this.outputTextBox.Size = new System.Drawing.Size(776, 210);
-            this.outputTextBox.TabIndex = 1;
+            outputTextBox.Location = new Point(14, 124);
+            outputTextBox.Margin = new Padding(3, 4, 3, 4);
+            outputTextBox.Multiline = true;
+            outputTextBox.Name = "outputTextBox";
+            outputTextBox.Size = new Size(872, 425);
+            outputTextBox.TabIndex = 1;
             // 
             // directoryTextBox
             // 
-            this.directoryTextBox.Location = new System.Drawing.Point(12, 12);
-            this.directoryTextBox.Name = "directoryTextBox";
-            this.directoryTextBox.Size = new System.Drawing.Size(776, 22);
-            this.directoryTextBox.TabIndex = 4;
-            this.directoryTextBox.Text = "src/main/resources/";
+            directoryTextBox.Location = new Point(126, 15);
+            directoryTextBox.Margin = new Padding(3, 4, 3, 4);
+            directoryTextBox.Name = "directoryTextBox";
+            directoryTextBox.Size = new Size(580, 27);
+            directoryTextBox.TabIndex = 4;
+            directoryTextBox.Text = "src/main/resources/";
             // 
             // translateButton
             // 
-            this.translateButton.Location = new System.Drawing.Point(12, 146);
-            this.translateButton.Name = "translateButton";
-            this.translateButton.Size = new System.Drawing.Size(75, 23);
-            this.translateButton.TabIndex = 2;
-            this.translateButton.Text = "Translate";
-            this.translateButton.UseVisualStyleBackColor = true;
-            this.translateButton.Click += new System.EventHandler(this.translateButton_Click);
+            translateButton.Location = new Point(802, 50);
+            translateButton.Margin = new Padding(3, 4, 3, 4);
+            translateButton.Name = "translateButton";
+            translateButton.Size = new Size(84, 29);
+            translateButton.TabIndex = 2;
+            translateButton.Text = "Translate";
+            translateButton.UseVisualStyleBackColor = true;
+            translateButton.Click += TranslateButton_Click;
             // 
             // processButton
             // 
-            this.processButton.Location = new System.Drawing.Point(713, 146);
-            this.processButton.Name = "processButton";
-            this.processButton.Size = new System.Drawing.Size(75, 23);
-            this.processButton.TabIndex = 3;
-            this.processButton.Text = "Process";
-            this.processButton.UseVisualStyleBackColor = true;
-            this.processButton.Click += new System.EventHandler(this.processButton_Click);
+            processButton.Location = new Point(712, 13);
+            processButton.Margin = new Padding(3, 4, 3, 4);
+            processButton.Name = "processButton";
+            processButton.Size = new Size(84, 29);
+            processButton.TabIndex = 3;
+            processButton.Text = "Process";
+            processButton.UseVisualStyleBackColor = true;
+            processButton.Click += ProcessButton_Click;
             // 
             // settingsButton
             // 
-            this.settingsButton.Location = new System.Drawing.Point(713, 12);
-            this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(75, 23);
-            this.settingsButton.TabIndex = 6;
-            this.settingsButton.Text = "Settings";
-            this.settingsButton.UseVisualStyleBackColor = true;
-            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            settingsButton.Location = new Point(802, 15);
+            settingsButton.Margin = new Padding(3, 4, 3, 4);
+            settingsButton.Name = "settingsButton";
+            settingsButton.Size = new Size(84, 29);
+            settingsButton.TabIndex = 6;
+            settingsButton.Text = "Settings";
+            settingsButton.UseVisualStyleBackColor = true;
+            settingsButton.Click += SettingsButton_Click;
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(12, 215);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(776, 23);
-            this.progressBar.TabIndex = 5;
+            progressBar.Location = new Point(16, 87);
+            progressBar.Margin = new Padding(3, 4, 3, 4);
+            progressBar.Name = "progressBar";
+            progressBar.Size = new Size(870, 29);
+            progressBar.TabIndex = 5;
             // 
-            // Form1
+            // ModsFolderLabel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.settingsButton);
-            this.Controls.Add(this.progressBar);
-            this.Controls.Add(this.directoryTextBox);
-            this.Controls.Add(this.processButton);
-            this.Controls.Add(this.translateButton);
-            this.Controls.Add(this.outputTextBox);
-            this.Controls.Add(this.inputTextBox);
-            this.Name = "Form1";
-            this.Text = "Translator App";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            ModsFolderLabel.AutoSize = true;
+            ModsFolderLabel.Location = new Point(14, 18);
+            ModsFolderLabel.Name = "ModsFolderLabel";
+            ModsFolderLabel.Size = new Size(106, 20);
+            ModsFolderLabel.TabIndex = 7;
+            ModsFolderLabel.Text = "Mods Folder:";
+            // 
+            // MainForm
+            // 
+            AutoScaleDimensions = new SizeF(9F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(900, 562);
+            Controls.Add(ModsFolderLabel);
+            Controls.Add(settingsButton);
+            Controls.Add(progressBar);
+            Controls.Add(directoryTextBox);
+            Controls.Add(processButton);
+            Controls.Add(translateButton);
+            Controls.Add(outputTextBox);
+            Controls.Add(inputTextBox);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "MainForm";
+            Text = "Translator App";
+            ResumeLayout(false);
+            PerformLayout();
         }
+
+        private Label ModsFolderLabel;
     }
 }
