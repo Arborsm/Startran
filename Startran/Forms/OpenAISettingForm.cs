@@ -1,6 +1,6 @@
 ﻿using OpenAI;
 
-namespace Startran
+namespace Startran.Forms
 {
     public partial class OpenAiSettingForm : Form
     {
@@ -10,6 +10,7 @@ namespace Startran
             _config = config;
             StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
+            SaveButton.Focus();
         }
 
         #region Windows Form Designer generated code
@@ -28,7 +29,7 @@ namespace Startran
             UrlTextBox = new TextBox();
             ApiTextBox = new TextBox();
             SaveButton = new Button();
-            this.RefreshButton = new Button();
+            RefreshButton = new Button();
             SuspendLayout();
             // 
             // modelLabel
@@ -57,11 +58,19 @@ namespace Startran
             // 
             resources.ApplyResources(UrlTextBox, "UrlTextBox");
             UrlTextBox.Name = "UrlTextBox";
+            UrlTextBox.TabStop = false;
+            UrlTextBox.UseSystemPasswordChar = true;
+            UrlTextBox.Enter += UrlTextBox_Enter;
+            UrlTextBox.Leave += UrlTextBox_Leave;
             // 
             // ApiTextBox
             // 
             resources.ApplyResources(ApiTextBox, "ApiTextBox");
             ApiTextBox.Name = "ApiTextBox";
+            ApiTextBox.TabStop = false;
+            ApiTextBox.UseSystemPasswordChar = true;
+            ApiTextBox.Enter += ApiTextBox_Enter;
+            ApiTextBox.Leave += ApiTextBox_Leave;
             // 
             // SaveButton
             // 
@@ -72,16 +81,16 @@ namespace Startran
             // 
             // RefreshButton
             // 
-            resources.ApplyResources(this.RefreshButton, "RefreshButton");
-            this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.UseVisualStyleBackColor = true;
-            this.RefreshButton.Click += this.RefreshButton_Click;
+            resources.ApplyResources(RefreshButton, "RefreshButton");
+            RefreshButton.Name = "RefreshButton";
+            RefreshButton.UseVisualStyleBackColor = true;
+            RefreshButton.Click += RefreshButton_Click;
             // 
             // OpenAiSettingForm
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(this.RefreshButton);
+            Controls.Add(RefreshButton);
             Controls.Add(SaveButton);
             Controls.Add(modelLabel);
             Controls.Add(urlLabel);
@@ -95,6 +104,26 @@ namespace Startran
             PerformLayout();
         }
 
+        private void ApiTextBox_Leave(object? sender, EventArgs e)
+        {
+            ApiTextBox.UseSystemPasswordChar = true;
+        }
+
+        private void ApiTextBox_Enter(object? sender, EventArgs e)
+        {
+            ApiTextBox.UseSystemPasswordChar = false;
+        }
+
+        private void UrlTextBox_Leave(object? sender, EventArgs e)
+        {
+            UrlTextBox.UseSystemPasswordChar = true;
+        }
+
+        private void UrlTextBox_Enter(object? sender, EventArgs e)
+        {
+            UrlTextBox.UseSystemPasswordChar = false;
+        }
+
         #endregion
 
         private void SaveButton_Click(object? sender, EventArgs e)
@@ -105,17 +134,17 @@ namespace Startran
 
         private void Save()
         {
-            _config.OpenAi.Api = ApiTextBox.Text;
-            _config.OpenAi.Url = UrlTextBox.Text;
-            _config.OpenAi.Model = ModelsComboBox.SelectedItem!.ToString()!;
+            _config.ApiConf.Api = ApiTextBox.Text;
+            _config.ApiConf.Url = UrlTextBox.Text;
+            _config.ApiConf.Model = ModelsComboBox.SelectedItem!.ToString()!;
         }
 
         private void OpenAISettingForm_Load(object? sender, EventArgs e)
         {
-            ApiTextBox.Text = _config.OpenAi.Api;
-            UrlTextBox.Text = _config.OpenAi.Url;
-            ModelsComboBox.Items.AddRange([.. _config.OpenAi.Models]);
-            ModelsComboBox.SelectedItem = _config.OpenAi.Model;
+            ApiTextBox.Text = _config.ApiConf.Api;
+            UrlTextBox.Text = _config.ApiConf.Url;
+            ModelsComboBox.Items.AddRange([.. _config.ApiConf.Models]);
+            ModelsComboBox.SelectedItem = _config.ApiConf.Model;
         }
 
         private async void RefreshButton_Click(object? sender, EventArgs e)
@@ -124,8 +153,8 @@ namespace Startran
             try
             {
                 using var httpClient = new HttpClient();
-                var api = new OpenAIAuthentication(_config.OpenAi.Api);
-                var url = new OpenAIClientSettings(_config.OpenAi.Url);
+                var api = new OpenAIAuthentication(_config.ApiConf.Api);
+                var url = new OpenAIClientSettings(_config.ApiConf.Url);
                 var client = new OpenAIClient(api, url, httpClient);
                 var models = await client.ModelsEndpoint.GetModelsAsync();
                 var list = models.Select(it => it.ToString()).ToList();
@@ -134,7 +163,7 @@ namespace Startran
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, Lang.Strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

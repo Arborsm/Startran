@@ -1,4 +1,4 @@
-﻿namespace Startran;
+﻿namespace Startran.Forms;
 
 public partial class SettingsForm
 {

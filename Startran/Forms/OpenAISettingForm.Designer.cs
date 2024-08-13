@@ -1,4 +1,4 @@
-﻿namespace Startran
+﻿namespace Startran.Forms
 {
     partial class OpenAiSettingForm
     {

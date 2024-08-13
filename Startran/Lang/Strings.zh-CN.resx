@@ -117,14 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApiConfigSetting" xml:space="preserve">
+    <value>Api设置：</value>
+  </data>
   <data name="DirectoryPath" xml:space="preserve">
     <value>目录</value>
+  </data>
+  <data name="En2Zh" xml:space="preserve">
+    <value>翻译提示文本：</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="ErrorOccurred" xml:space="preserve">
+    <value>发生错误：</value>
+  </data>
+  <data name="InvalidDirectoryPath" xml:space="preserve">
+    <value>文件夹路径不可用</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言：</value>
   </data>
   <data name="ProcessButton" xml:space="preserve">
     <value>处理</value>
   </data>
   <data name="ProcessFinished" xml:space="preserve">
     <value>处理完成</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
   </data>
   <data name="SettingsButton" xml:space="preserve">
     <value>设置</value>

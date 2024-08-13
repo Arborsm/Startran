@@ -1,3 +1,5 @@
+using Startran.Forms;
+
 namespace Startran;
 
 static class Program

@@ -61,11 +61,83 @@ namespace Startran.Lang {
         }
         
         /// <summary>
-        ///   查找类似 Directory Path 的本地化字符串。
+        ///   查找类似 Api Setting: 的本地化字符串。
+        /// </summary>
+        internal static string ApiConfigSetting {
+            get {
+                return ResourceManager.GetString("ApiConfigSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 After setting up, select the &apos;mods&apos; folder and press process 的本地化字符串。
+        /// </summary>
+        internal static string BeforTrans {
+            get {
+                return ResourceManager.GetString("BeforTrans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Directory Path: 的本地化字符串。
         /// </summary>
         internal static string DirectoryPath {
             get {
                 return ResourceManager.GetString("DirectoryPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Translation prompt text: 的本地化字符串。
+        /// </summary>
+        internal static string En2Zh {
+            get {
+                return ResourceManager.GetString("En2Zh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Error 的本地化字符串。
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Error occurred: 的本地化字符串。
+        /// </summary>
+        internal static string ErrorOccurred {
+            get {
+                return ResourceManager.GetString("ErrorOccurred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Invalid directory path. 的本地化字符串。
+        /// </summary>
+        internal static string InvalidDirectoryPath {
+            get {
+                return ResourceManager.GetString("InvalidDirectoryPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Language: 的本地化字符串。
+        /// </summary>
+        internal static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Mods Folder: 的本地化字符串。
+        /// </summary>
+        internal static string ModsFolder {
+            get {
+                return ResourceManager.GetString("ModsFolder", resourceCulture);
             }
         }
         
@@ -88,6 +160,24 @@ namespace Startran.Lang {
         }
         
         /// <summary>
+        ///   查找类似 Save 的本地化字符串。
+        /// </summary>
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 SelectFolder 的本地化字符串。
+        /// </summary>
+        internal static string SelectFolderButton {
+            get {
+                return ResourceManager.GetString("SelectFolderButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Settings 的本地化字符串。
         /// </summary>
         internal static string SettingsButton {
@@ -102,6 +192,15 @@ namespace Startran.Lang {
         internal static string TranslateButton {
             get {
                 return ResourceManager.GetString("TranslateButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Translating... 的本地化字符串。
+        /// </summary>
+        internal static string Translating {
+            get {
+                return ResourceManager.GetString("Translating", resourceCulture);
             }
         }
     }

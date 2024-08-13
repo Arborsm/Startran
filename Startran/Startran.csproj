@@ -13,4 +13,22 @@
       <PackageReference Include="OpenAI-DotNet" Version="8.1.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Lang\Strings.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Strings.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Lang\Strings.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Lang\Strings.zh-CN.resx">
+        <Generator></Generator>
+      </EmbeddedResource>
+    </ItemGroup>
+
 </Project>

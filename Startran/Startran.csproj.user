@@ -1,18 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="MainForm.cs">
+    <Compile Update="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="OpenAISettingForm.cs">
+    <Compile Update="Forms\OpenAISettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="SettingsForm.cs">
+    <Compile Update="Forms\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="OpenAISettingForm.resx">
+    <EmbeddedResource Update="Lang\Strings.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Lang\Strings.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\OpenAISettingForm.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

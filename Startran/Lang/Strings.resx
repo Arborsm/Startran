@@ -117,8 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApiConfigSetting" xml:space="preserve">
+    <value>Api Setting:</value>
+  </data>
+  <data name="BeforTrans" xml:space="preserve">
+    <value>After setting up, select the 'mods' folder and press process</value>
+  </data>
   <data name="DirectoryPath" xml:space="preserve">
-    <value>Directory Path</value>
+    <value>Directory Path:</value>
+  </data>
+  <data name="En2Zh" xml:space="preserve">
+    <value>Translation prompt text:</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorOccurred" xml:space="preserve">
+    <value>Error occurred:</value>
+  </data>
+  <data name="InvalidDirectoryPath" xml:space="preserve">
+    <value>Invalid directory path.</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language:</value>
+  </data>
+  <data name="ModsFolder" xml:space="preserve">
+    <value>Mods Folder:</value>
   </data>
   <data name="ProcessButton" xml:space="preserve">
     <value>Process</value>
@@ -126,10 +150,19 @@
   <data name="ProcessFinished" xml:space="preserve">
     <value>Processing completed.</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SelectFolderButton" xml:space="preserve">
+    <value>SelectFolder</value>
+  </data>
   <data name="SettingsButton" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="TranslateButton" xml:space="preserve">
     <value>Translate</value>
+  </data>
+  <data name="Translating" xml:space="preserve">
+    <value>Translating...</value>
   </data>
 </root>

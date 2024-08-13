@@ -1,4 +1,6 @@
-﻿namespace Startran;
+﻿using Startran.Trans;
+
+namespace Startran.Forms;
 
 public partial class SettingsForm : Form
 {
@@ -11,8 +13,8 @@ public partial class SettingsForm : Form
         DirectoryPathTextBox.Text = config.DirectoryPath;
         LangTextBox.Text = config.Language;
         EnToZhRichTextBox.Text = config.EnToCn;
-        ApiComboBox.Items.AddRange([.. config.Apis]);
-        ApiComboBox.SelectedItem = config.Api;
+        ApiComboBox.Items.AddRange([.. Translator.Apis.Select(it => it.Name).ToList()]);
+        ApiComboBox.SelectedItem = config.ApiSelected;
     }
     private void InitializeComponent()
     {
@@ -35,7 +37,7 @@ public partial class SettingsForm : Form
         DirectoryPathLabel.Name = "DirectoryPathLabel";
         DirectoryPathLabel.Size = new Size(117, 20);
         DirectoryPathLabel.TabIndex = 0;
-        DirectoryPathLabel.Text = "Directory Path:";
+        DirectoryPathLabel.Text = Lang.Strings.DirectoryPath;
         // 
         // DirectoryPathTextBox
         // 
@@ -51,7 +53,7 @@ public partial class SettingsForm : Form
         LangLabel.Name = "LangLabel";
         LangLabel.Size = new Size(84, 20);
         LangLabel.TabIndex = 2;
-        LangLabel.Text = "Language:";
+        LangLabel.Text = Lang.Strings.Language;
         // 
         // LangTextBox
         // 
@@ -67,7 +69,7 @@ public partial class SettingsForm : Form
         EnToZhLabel.Name = "EnToZhLabel";
         EnToZhLabel.Size = new Size(67, 20);
         EnToZhLabel.TabIndex = 4;
-        EnToZhLabel.Text = "EnToZh:";
+        EnToZhLabel.Text = Lang.Strings.En2Zh;
         // 
         // EnToZhRichTextBox
         // 
@@ -75,7 +77,7 @@ public partial class SettingsForm : Form
         EnToZhRichTextBox.Name = "EnToZhRichTextBox";
         EnToZhRichTextBox.Size = new Size(426, 184);
         EnToZhRichTextBox.TabIndex = 5;
-        EnToZhRichTextBox.Text = "";
+        //EnToZhRichTextBox.Text = "";
         // 
         // ApiSettingLabel
         // 
@@ -84,7 +86,7 @@ public partial class SettingsForm : Form
         ApiSettingLabel.Name = "ApiSettingLabel";
         ApiSettingLabel.Size = new Size(95, 20);
         ApiSettingLabel.TabIndex = 6;
-        ApiSettingLabel.Text = "Api Setting:";
+        ApiSettingLabel.Text = Lang.Strings.ApiConfigSetting;
         // 
         // ApiComboBox
         // 
@@ -100,7 +102,7 @@ public partial class SettingsForm : Form
         ApiSettingButton.Name = "ApiSettingButton";
         ApiSettingButton.Size = new Size(94, 29);
         ApiSettingButton.TabIndex = 8;
-        ApiSettingButton.Text = "Setting";
+        ApiSettingButton.Text = Lang.Strings.SettingsButton;
         ApiSettingButton.UseVisualStyleBackColor = true;
         ApiSettingButton.Click += ApiSettingButton_Click;
         // 
@@ -110,7 +112,7 @@ public partial class SettingsForm : Form
         SaveButton.Name = "SaveButton";
         SaveButton.Size = new Size(94, 29);
         SaveButton.TabIndex = 9;
-        SaveButton.Text = "Save";
+        SaveButton.Text = Lang.Strings.Save;
         SaveButton.UseVisualStyleBackColor = true;
         SaveButton.Click += SaveButton_Click;
         // 
@@ -142,7 +144,7 @@ public partial class SettingsForm : Form
         _config.DirectoryPath = DirectoryPathTextBox.Text;
         _config.Language = LangTextBox.Text;
         _config.EnToCn = EnToZhRichTextBox.Text;
-        _config.Api = ApiComboBox.SelectedItem!.ToString()!;
+        _config.ApiSelected = ApiComboBox.SelectedItem!.ToString()!;
         Close();
     }
 }
