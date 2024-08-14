@@ -1,10 +1,12 @@
-using Startran.Trans;
-using System.DirectoryServices.ActiveDirectory;
+using System.IO;
+using AntdUI;
+using Startran.Misc;
 using Startran.Mod;
+using Startran.Trans;
 
 namespace Startran.Forms;
 
-public partial class MainForm : Form
+public partial class MainForm : Window
 {
     private readonly AppConfig _config;
     private readonly Translator _trans;
@@ -13,8 +15,9 @@ public partial class MainForm : Form
     {
         StartPosition = FormStartPosition.CenterScreen;
         InitializeComponent();
+        menuStrip1.HideImageMargins();
         _config = AppConfig.Load();
-        _trans = new Translator(_config, this);
+        _trans = new Translator(_config);
         directoryTextBox.Text = _config.DirectoryPath;
     }
 
@@ -23,7 +26,13 @@ public partial class MainForm : Form
         var userInput = inputTextBox.Text.Trim();
         inputTextBox.Text = string.Empty;
         if (string.IsNullOrEmpty(userInput)) return;
-        outputTextBox.AppendText(await _trans.TranslateText(userInput) + Environment.NewLine);
+        MessageTool.Loading(this, "Action in progress..", _ =>
+        {
+            Thread.Sleep(30000);
+        }, Font, 30);
+        var text = await _trans.TranslateText(userInput);
+        MessageTool.SuccessWithBreak(this, $"Copied: {text}");
+        Clipboard.SetText(text);
     }
 
     private async void ProcessButton_Click(object sender, EventArgs e)
@@ -31,28 +40,17 @@ public partial class MainForm : Form
         var directoryPath = directoryTextBox.Text.Trim();
         if (Directory.Exists(directoryPath))
         {
-            ModData.Instance.FindMods(directoryPath);
-            mainPogressBar.Value = 0;
-            outputTextBox.Text = string.Empty;
-            await _trans.ProcessDirectories(directoryPath);
-            sonLabel.Text = Lang.Strings.BeforTrans;
-            InforLabel.Text = string.Empty;
-            NumLabel.Text = string.Empty;
-            MainNumLabel.Text = string.Empty;
-            MessageBox.Show(Lang.Strings.ProcessFinished);
+            var translateForm = new TranslateForm();
+            translateForm.Show();
+            await ModData.Instance.FindModsAsync(directoryPath);
+            _trans.Form = translateForm;
+            await _trans.ProcessDirectories();
+            MessageTool.Success(this, Lang.Strings.ProcessFinished);
         }
         else
         {
-            MessageBox.Show(Lang.Strings.InvalidDirectoryPath);
+            MessageTool.Error(this, Lang.Strings.InvalidDirectoryPath);
         }
-    }
-
-    private void SettingsButton_Click(object sender, EventArgs e)
-    {
-        var settingsForm = new SettingsForm(_config);
-        settingsForm.ShowDialog();
-        _config.Save();
-        directoryTextBox.Text = _config.DirectoryPath;
     }
 
     private void InputTextBox_KeyDown(object? sender, KeyEventArgs e)
@@ -78,36 +76,23 @@ public partial class MainForm : Form
         }
     }
 
-    public Action UpdateText(string key, string result, List<string> processedMapKeys, List<string> keys)
+    private void settingToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        return () =>
-        {
-            var text = $@"{processedMapKeys.Count}/{keys.Count}";
-            var g = CreateGraphics();
-            var numLabelTextSize = g.MeasureString(text, NumLabel.Font);
-            var numLabelPoint = NumLabel.Location with { X = (int)(ClientSize.Width - numLabelTextSize.Width - 12) };
-            g.Dispose();
-            sonLabel.Text = Lang.Strings.Translating;
-            InforLabel.Text = key;
-            NumLabel.Text = text;
-            NumLabel.Location = numLabelPoint;
-            outputTextBox.AppendText(result + Environment.NewLine);
-            outputTextBox.ScrollToCaret();
-            sonProgressPar.Value++;
-        };
+        var settingsForm = new SettingsForm(_config);
+        settingsForm.ShowDialog();
+        _config.Save();
+        directoryTextBox.Text = _config.DirectoryPath;
     }
 
-    public Action UpdateMainText(int num)
+    private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        return () =>
-        {
-            var text = $@"{num}/{mainPogressBar.Maximum}";
-            var g = CreateGraphics();
-            var mainNumLabelTextSize = g.MeasureString(text, MainNumLabel.Font);
-            var mainNumLabelPoint = MainNumLabel.Location with { X = (int)(ClientSize.Width - mainNumLabelTextSize.Width - 12) };
-            g.Dispose();
-            MainNumLabel.Text = text;
-            MainNumLabel.Location = mainNumLabelPoint;
-        };
+        var aboutBox = new AboutBox();
+        aboutBox.ShowDialog();
+    }
+
+    private void proofreadToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var proofreadForm = new ProofreadForm();
+        proofreadForm.ShowDialog();
     }
 }

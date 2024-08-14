@@ -2,13 +2,25 @@
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net8.0-windows</TargetFramework>
+        <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWindowsForms>true</UseWindowsForms>
         <ImplicitUsings>enable</ImplicitUsings>
+        <ApplicationIcon>Asset\startran.ico</ApplicationIcon>
+	    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<PublishSingleFile>true</PublishSingleFile>
+	    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+	    <SelfContained>true</SelfContained>
+	    <UseWPF>True</UseWPF>
+	    <ForceDesignerDPIUnaware>true</ForceDesignerDPIUnaware>
     </PropertyGroup>
 
     <ItemGroup>
+      <Content Include="Asset\startran.ico" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AntdUI" Version="1.5.1" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
       <PackageReference Include="OpenAI-DotNet" Version="8.1.1" />
     </ItemGroup>

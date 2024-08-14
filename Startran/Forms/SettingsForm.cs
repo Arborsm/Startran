@@ -5,17 +5,7 @@ namespace Startran.Forms;
 public partial class SettingsForm : Form
 {
     private readonly AppConfig _config;
-    public SettingsForm(AppConfig config)
-    {
-        _config = config;
-        StartPosition = FormStartPosition.CenterScreen;
-        InitializeComponent();
-        DirectoryPathTextBox.Text = config.DirectoryPath;
-        LangTextBox.Text = config.Language;
-        EnToZhRichTextBox.Text = config.EnToCn;
-        ApiComboBox.Items.AddRange([.. Translator.Apis.Select(it => it.Name).ToList()]);
-        ApiComboBox.SelectedItem = config.ApiSelected;
-    }
+
     private void InitializeComponent()
     {
         DirectoryPathLabel = new Label();
@@ -28,6 +18,9 @@ public partial class SettingsForm : Form
         ApiComboBox = new ComboBox();
         ApiSettingButton = new Button();
         SaveButton = new Button();
+        OtherLabel = new Label();
+        IsSaveSourceCkBox = new CheckBox();
+        IsSaveTranslatedCkBox = new CheckBox();
         SuspendLayout();
         // 
         // DirectoryPathLabel
@@ -37,7 +30,7 @@ public partial class SettingsForm : Form
         DirectoryPathLabel.Name = "DirectoryPathLabel";
         DirectoryPathLabel.Size = new Size(117, 20);
         DirectoryPathLabel.TabIndex = 0;
-        DirectoryPathLabel.Text = Lang.Strings.DirectoryPath;
+        DirectoryPathLabel.Text = "Directory Path:";
         // 
         // DirectoryPathTextBox
         // 
@@ -53,7 +46,7 @@ public partial class SettingsForm : Form
         LangLabel.Name = "LangLabel";
         LangLabel.Size = new Size(84, 20);
         LangLabel.TabIndex = 2;
-        LangLabel.Text = Lang.Strings.Language;
+        LangLabel.Text = "Language:";
         // 
         // LangTextBox
         // 
@@ -67,9 +60,9 @@ public partial class SettingsForm : Form
         EnToZhLabel.AutoSize = true;
         EnToZhLabel.Location = new Point(12, 115);
         EnToZhLabel.Name = "EnToZhLabel";
-        EnToZhLabel.Size = new Size(67, 20);
+        EnToZhLabel.Size = new Size(186, 20);
         EnToZhLabel.TabIndex = 4;
-        EnToZhLabel.Text = Lang.Strings.En2Zh;
+        EnToZhLabel.Text = "Translation prompt text:";
         // 
         // EnToZhRichTextBox
         // 
@@ -77,7 +70,7 @@ public partial class SettingsForm : Form
         EnToZhRichTextBox.Name = "EnToZhRichTextBox";
         EnToZhRichTextBox.Size = new Size(426, 184);
         EnToZhRichTextBox.TabIndex = 5;
-        //EnToZhRichTextBox.Text = "";
+        EnToZhRichTextBox.Text = "";
         // 
         // ApiSettingLabel
         // 
@@ -86,7 +79,7 @@ public partial class SettingsForm : Form
         ApiSettingLabel.Name = "ApiSettingLabel";
         ApiSettingLabel.Size = new Size(95, 20);
         ApiSettingLabel.TabIndex = 6;
-        ApiSettingLabel.Text = Lang.Strings.ApiConfigSetting;
+        ApiSettingLabel.Text = "Api Setting:";
         // 
         // ApiComboBox
         // 
@@ -116,9 +109,41 @@ public partial class SettingsForm : Form
         SaveButton.UseVisualStyleBackColor = true;
         SaveButton.Click += SaveButton_Click;
         // 
+        // OtherLabel
+        // 
+        OtherLabel.AutoSize = true;
+        OtherLabel.Location = new Point(12, 379);
+        OtherLabel.Name = "OtherLabel";
+        OtherLabel.Size = new Size(55, 20);
+        OtherLabel.TabIndex = 10;
+        OtherLabel.Text = "Other:";
+        // 
+        // IsSaveSourceCkBox
+        // 
+        IsSaveSourceCkBox.AutoSize = true;
+        IsSaveSourceCkBox.Location = new Point(12, 402);
+        IsSaveSourceCkBox.Name = "IsSaveSourceCkBox";
+        IsSaveSourceCkBox.Size = new Size(247, 24);
+        IsSaveSourceCkBox.TabIndex = 11;
+        IsSaveSourceCkBox.Text = "Save traslated lang source file";
+        IsSaveSourceCkBox.UseVisualStyleBackColor = true;
+        // 
+        // IsSaveTranslatedCkBox
+        // 
+        IsSaveTranslatedCkBox.AutoSize = true;
+        IsSaveTranslatedCkBox.Location = new Point(12, 432);
+        IsSaveTranslatedCkBox.Name = "IsSaveTranslatedCkBox";
+        IsSaveTranslatedCkBox.Size = new Size(203, 24);
+        IsSaveTranslatedCkBox.TabIndex = 12;
+        IsSaveTranslatedCkBox.Text = "Save translated lang file";
+        IsSaveTranslatedCkBox.UseVisualStyleBackColor = true;
+        // 
         // SettingsForm
         // 
         ClientSize = new Size(450, 517);
+        Controls.Add(IsSaveTranslatedCkBox);
+        Controls.Add(IsSaveSourceCkBox);
+        Controls.Add(OtherLabel);
         Controls.Add(SaveButton);
         Controls.Add(ApiSettingButton);
         Controls.Add(ApiComboBox);
@@ -130,6 +155,8 @@ public partial class SettingsForm : Form
         Controls.Add(DirectoryPathTextBox);
         Controls.Add(DirectoryPathLabel);
         Name = "SettingsForm";
+        ShowIcon = false;
+        Text = "Setting";
         ResumeLayout(false);
         PerformLayout();
     }
@@ -139,12 +166,28 @@ public partial class SettingsForm : Form
         new OpenAiSettingForm(_config).ShowDialog();
     }
 
+    public SettingsForm(AppConfig config)
+    {
+        _config = config;
+        StartPosition = FormStartPosition.CenterScreen;
+        InitializeComponent();
+        DirectoryPathTextBox.Text = config.DirectoryPath;
+        LangTextBox.Text = config.Language;
+        EnToZhRichTextBox.Text = config.EnToCn;
+        ApiComboBox.Items.AddRange(Translator.Apis.Select(it => it.Name).ToArray<object>());
+        ApiComboBox.SelectedItem = config.ApiSelected;
+        IsSaveSourceCkBox.Checked = config.IsSaveSource;
+        IsSaveTranslatedCkBox.Checked = config.IsSaveTranslated;
+    }
+
     private void SaveButton_Click(object? sender, EventArgs e)
     {
         _config.DirectoryPath = DirectoryPathTextBox.Text;
         _config.Language = LangTextBox.Text;
         _config.EnToCn = EnToZhRichTextBox.Text;
         _config.ApiSelected = ApiComboBox.SelectedItem!.ToString()!;
+        _config.IsSaveSource = IsSaveSourceCkBox.Checked;
+        _config.IsSaveTranslated = IsSaveTranslatedCkBox.Checked;
         Close();
     }
 }

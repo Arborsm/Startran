@@ -1,10 +1,13 @@
-﻿using OpenAI;
+﻿using System.Net.Http;
+using OpenAI;
 using OpenAI.Chat;
 using Message = OpenAI.Chat.Message;
 
 namespace Startran.Trans
 {
-    internal class OpenDAiTrans : ITranslator
+    // ReSharper disable once UnusedMember.Global
+    // ReSharper disable once InconsistentNaming
+    internal class OpenAITrans : ITranslator
     {
         public string Name => "OpenAI";
 

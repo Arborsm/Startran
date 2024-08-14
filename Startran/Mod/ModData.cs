@@ -1,24 +1,24 @@
-﻿using System;
-using System.Text.Json.Nodes;
+﻿using System.IO;
 
 namespace Startran.Mod
 {
     internal class ModData
     {
         public static ModData Instance = new();
-        public Dictionary<string, IMod> Mods = [];
+        public Dictionary<string, IMod> Mods = null!;
 
-        public void FindMods(string path)
+        public async Task FindModsAsync(string path)
         {
             if (Directory.Exists(path))
             {
+                Mods = new Dictionary<string, IMod>();
                 var manifestFiles = new List<string>();
-                FindManifestFiles(path, manifestFiles);
-                manifestFiles.ForEach(manifestFile =>
+                await FindManifestFilesAsync(path, manifestFiles);
+
+                foreach (var mod in manifestFiles.Select(manifestFile => new IMod(manifestFile)))
                 {
-                    var mod = new IMod(manifestFile);
                     Mods.Add(mod.Name, mod);
-                });
+                }
             }
             else
             {
@@ -26,18 +26,18 @@ namespace Startran.Mod
             }
         }
 
-
-        private static void FindManifestFiles(string path, List<string> manifestFiles)
+        private static async Task FindManifestFilesAsync(string path, List<string> manifestFiles)
         {
             try
             {
-                var files = Directory.GetFiles(path);
+                var files = await Task.Run(() => Directory.GetFiles(path));
                 manifestFiles.AddRange(files.Where(file => Path.GetFileName(file).Equals("manifest.json", StringComparison.OrdinalIgnoreCase)));
-                var directories = Directory.GetDirectories(path);
+
+                var directories = await Task.Run(() => Directory.GetDirectories(path));
 
                 foreach (var directory in directories)
                 {
-                    FindManifestFiles(directory, manifestFiles);
+                    await FindManifestFilesAsync(directory, manifestFiles);
                 }
             }
             catch (Exception ex)
@@ -45,5 +45,6 @@ namespace Startran.Mod
                 MessageBox.Show(ex.Message);
             }
         }
+
     }
 }

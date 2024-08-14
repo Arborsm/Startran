@@ -187,6 +187,15 @@ namespace Startran.Lang {
         }
         
         /// <summary>
+        ///   查找类似 StarTranslator 的本地化字符串。
+        /// </summary>
+        internal static string StarTranslator {
+            get {
+                return ResourceManager.GetString("StarTranslator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Translate 的本地化字符串。
         /// </summary>
         internal static string TranslateButton {

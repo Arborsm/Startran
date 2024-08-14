@@ -12,4 +12,7 @@ public partial class SettingsForm
     private ComboBox ApiComboBox;
     private Button ApiSettingButton;
     private Button SaveButton;
+    private Label OtherLabel;
+    private CheckBox IsSaveSourceCkBox;
+    private CheckBox IsSaveTranslatedCkBox;
 }

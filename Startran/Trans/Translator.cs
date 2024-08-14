@@ -1,24 +1,26 @@
-﻿using System.Collections.Concurrent;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Startran.Forms;
+using System.Collections.Concurrent;
+using System.IO;
+using System.Text;
+using Startran.Mod;
 
 namespace Startran.Trans;
 
 public class Translator
 {
-    public static List<ITranslator> Apis { get; } = [];
+    public static List<ITranslator> Apis { get; } = new();
     private readonly AppConfig _config;
-    private readonly MainForm _main;
     private const string En = "default.json";
     private readonly string _cn;
     private readonly string _cnSource;
     private readonly string _cnTranslated;
-    public Translator(AppConfig config, MainForm main) 
+    public TranslateForm Form = null!;
+
+    public Translator(AppConfig config)
     {
         FindAllApis();
         _config = config;
-        _main = main;
         _cn = config.Language + ".json";
         _cnSource = config.Language + "-Source.json";
         _cnTranslated = config.Language + "-Translated.json";
@@ -30,7 +32,7 @@ public class Translator
         foreach (var type in types)
         {
             if (!type.GetInterfaces().Contains(typeof(ITranslator))) continue;
-            var instance = (ITranslator)Activator.CreateInstance(type)!;
+            var instance = (ITranslator) Activator.CreateInstance(type)!;
             Apis.Add(instance);
         }
     }
@@ -60,10 +62,10 @@ public class Translator
 
     internal async Task<Dictionary<string, string>> ProcessText(Dictionary<string, string> map, Dictionary<string, string>? mapAllCn, string role)
     {
-        mapAllCn ??= [];
+        mapAllCn ??= new Dictionary<string, string>();
         var processedMap = new ConcurrentDictionary<string, string>();
         var keys = map.Keys.Except(mapAllCn.Keys).ToList();
-        _main.sonProgressPar.Maximum = keys.Count;
+        //_main.sonProgressPar.Maximum = keys.Count;
         var tasks = keys.Select(async key =>
         {
             string? result = null;
@@ -83,7 +85,7 @@ public class Translator
                 }
             } while (result == null);
             Console.WriteLine(result);
-            _main.Invoke(_main.UpdateText(key, result, processedMap.Keys.ToList(), keys));
+            Form.Invoke(Form.SonProgressUpdate(key, result, processedMap.Keys.ToList(), keys));
             processedMap[key] = result;
         });
 
@@ -91,17 +93,17 @@ public class Translator
         return processedMap.ToDictionary(k => k.Key, v => v.Value);
     }
 
-    internal async Task ProcessDirectories(string directoryPath)
+    internal async Task ProcessDirectories()
     {
-        var i = -1;
-        var directories = Directory.GetDirectories(directoryPath);
-        _main.mainPogressBar.Maximum = directories.Length;
+        var i = 0;
+        var directories = ModData.Instance.Mods.Select(it => it.Value.PathS).ToArray();
+        var maximum = (float) directories.Length;
 
         var tasks = directories.Select(async directory =>
         {
-            _main.Invoke(_main.UpdateMainText(++i));
+            Form.Invoke(Form.MainProgressUpdate(0, $@"0/{maximum}"));
             await ProcessDirectory(directory);
-            _main.Invoke(new Action(() => _main.mainPogressBar.Value++));
+            Form.Invoke(Form.MainProgressUpdate(1.0f / maximum, $@"{++i}/{maximum}"));
         });
 
         await Task.WhenAll(tasks);
@@ -113,7 +115,7 @@ public class Translator
         var cn = GetJsonString(directoryPath, _cn);
 
         var mapAll = JsonConvert.DeserializeObject<Dictionary<string, string>>(en)!;
-        var mapAllCn = JsonConvert.DeserializeObject<Dictionary<string, string>>(cn) ?? [];
+        var mapAllCn = JsonConvert.DeserializeObject<Dictionary<string, string>>(cn) ?? new Dictionary<string, string>();
         var path = Path.Combine(directoryPath, "i18n");
         if (_config.IsSaveSource)
         {
@@ -121,6 +123,7 @@ public class Translator
         }
 
         var tran = await ProcessText(mapAll, mapAllCn, _config.EnToCn);
+
         if (_config.IsSaveTranslated)
         {
             await File.WriteAllTextAsync(Path.Combine(path, _cnTranslated), JsonConvert.SerializeObject(tran));

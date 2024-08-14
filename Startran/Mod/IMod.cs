@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.IO;
+using Newtonsoft.Json;
 
 // ReSharper disable InconsistentNaming
 
@@ -11,9 +12,9 @@ namespace Startran.Mod
             var manifestPath = Path.GetFullPath(path);
             var parentDirectory = Path.GetDirectoryName(manifestPath)!;
             var manifest = File.ReadAllText(path);
-            List<string> i18n = [];
+            List<string> i18n = new();
             try
-            { 
+            {
                 var i18nFiles = Directory.GetFiles(parentDirectory + @"\\i18n", "*.json");
                 i18n.AddRange(i18nFiles.Select(Path.GetFileNameWithoutExtension)!);
             }

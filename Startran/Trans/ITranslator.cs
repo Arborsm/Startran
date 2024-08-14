@@ -1,4 +1,4 @@
-﻿namespace Startran
+﻿namespace Startran.Trans
 {
     public interface ITranslator
     {

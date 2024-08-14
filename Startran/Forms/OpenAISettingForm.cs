@@ -1,4 +1,5 @@
-﻿using OpenAI;
+﻿using System.Net.Http;
+using OpenAI;
 
 namespace Startran.Forms
 {
@@ -100,6 +101,7 @@ namespace Startran.Forms
             Controls.Add(ApiTextBox);
             Name = "OpenAiSettingForm";
             Load += OpenAISettingForm_Load;
+            ShowIcon = false;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -137,13 +139,19 @@ namespace Startran.Forms
             _config.ApiConf.Api = ApiTextBox.Text;
             _config.ApiConf.Url = UrlTextBox.Text;
             _config.ApiConf.Model = ModelsComboBox.SelectedItem!.ToString()!;
+            _config.ApiConf.Models.Clear();
+            foreach (var item in ModelsComboBox.Items)
+            {
+                _config.ApiConf.Models.Add(item.ToString()!);
+            }
+            _config.Save();
         }
 
         private void OpenAISettingForm_Load(object? sender, EventArgs e)
         {
             ApiTextBox.Text = _config.ApiConf.Api;
             UrlTextBox.Text = _config.ApiConf.Url;
-            ModelsComboBox.Items.AddRange([.. _config.ApiConf.Models]);
+            ModelsComboBox.Items.AddRange(_config.ApiConf.Models.ToArray<object>());
             ModelsComboBox.SelectedItem = _config.ApiConf.Model;
         }
 
@@ -159,7 +167,7 @@ namespace Startran.Forms
                 var models = await client.ModelsEndpoint.GetModelsAsync();
                 var list = models.Select(it => it.ToString()).ToList();
                 ModelsComboBox.Items.Clear();
-                ModelsComboBox.Items.AddRange([.. list]);
+                ModelsComboBox.Items.AddRange(list.ToArray<object>());
             }
             catch (Exception ex)
             {
