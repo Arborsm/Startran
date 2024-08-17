@@ -117,43 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ApiConfigSetting" xml:space="preserve">
-    <value>Api设置：</value>
-  </data>
-  <data name="DirectoryPath" xml:space="preserve">
-    <value>目录</value>
-  </data>
-  <data name="En2Zh" xml:space="preserve">
-    <value>翻译提示文本：</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>错误</value>
-  </data>
-  <data name="ErrorOccurred" xml:space="preserve">
-    <value>发生错误：</value>
-  </data>
-  <data name="InvalidDirectoryPath" xml:space="preserve">
-    <value>文件夹路径不可用</value>
-  </data>
-  <data name="Language" xml:space="preserve">
-    <value>目标语言：</value>
-  </data>
-  <data name="Page" xml:space="preserve">
-    <value>{0} / {1} 第 {2} 页</value>
-  </data>
-  <data name="ProcessButton" xml:space="preserve">
-    <value>处理</value>
-  </data>
-  <data name="ProcessFinished" xml:space="preserve">
-    <value>处理完成</value>
-  </data>
   <data name="Save" xml:space="preserve">
-    <value>保存</value>
+    <value>&lt;svg t="1723806987762" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6076" width="200" height="200"&gt;&lt;path d="M674.909091 93.090909v162.909091H349.090909V93.090909h325.818182m93.090909-93.090909H256v302.545455c0 25.6 20.945455 46.545455 46.545455 46.545454h418.90909c25.6 0 46.545455-20.945455 46.545455-46.545454V0z" fill="#176AFD" p-id="6077"&gt;&lt;/path&gt;&lt;path d="M837.818182 93.090909c51.2 0 93.090909 41.890909 93.090909 93.090909v651.636364c0 51.2-41.890909 93.090909-93.090909 93.090909H186.181818c-51.2 0-93.090909-41.890909-93.090909-93.090909V186.181818c0-51.2 41.890909-93.090909 93.090909-93.090909h651.636364m0-93.090909H186.181818C83.781818 0 0 83.781818 0 186.181818v651.636364c0 102.4 83.781818 186.181818 186.181818 186.181818h651.636364c102.4 0 186.181818-83.781818 186.181818-186.181818V186.181818c0-102.4-83.781818-186.181818-186.181818-186.181818z" fill="#1D2633" p-id="6078"&gt;&lt;/path&gt;&lt;/svg&gt;</value>
   </data>
-  <data name="SettingsButton" xml:space="preserve">
-    <value>设置</value>
-  </data>
-  <data name="TranslateButton" xml:space="preserve">
-    <value>翻译</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="startran" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>startran.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

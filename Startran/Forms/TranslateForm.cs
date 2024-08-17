@@ -4,11 +4,19 @@ namespace Startran.Forms
 {
     public partial class TranslateForm : BorderlessForm
     {
+        public CancellationTokenSource Tsl;
 
         public TranslateForm()
         {
             StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
+            Tsl = new CancellationTokenSource();
+            FormClosing += Form2_FormClosing;
+        }
+
+        private void Form2_FormClosing(object? sender, FormClosingEventArgs e)
+        {
+            Tsl.Cancel();
         }
 
         public Action MainProgressUpdate(float progress, string message)
@@ -20,9 +28,8 @@ namespace Startran.Forms
             };
         }
 
-        public Action SonProgressUpdate(string key, string result, List<string> processedMapKeys, List<string> keys)
-        {
-            return () =>
+        public Action SonProgressUpdate(string key, List<string> processedMapKeys, List<string> keys) =>
+            () =>
             {
                 var text = $@"{processedMapKeys.Count}/{keys.Count}";
                 var feet = 1.0f / keys.Count;
@@ -35,6 +42,5 @@ namespace Startran.Forms
                 SonProgress.Text = text;
                 SonProgress.Value += feet;
             };
-        }
     }
 }

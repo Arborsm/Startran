@@ -139,10 +139,13 @@
     <value>Invalid directory path.</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Language:</value>
+    <value>Target Language:</value>
   </data>
   <data name="ModsFolder" xml:space="preserve">
     <value>Mods Folder:</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>{0} / {1} items {2} pages</value>
   </data>
   <data name="ProcessButton" xml:space="preserve">
     <value>Process</value>

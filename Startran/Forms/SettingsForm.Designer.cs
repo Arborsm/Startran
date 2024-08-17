@@ -15,4 +15,5 @@ public partial class SettingsForm
     private Label OtherLabel;
     private CheckBox IsSaveSourceCkBox;
     private CheckBox IsSaveTranslatedCkBox;
+    private CheckBox DebugCheckBox;
 }

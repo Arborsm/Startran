@@ -5,7 +5,7 @@ namespace Startran.Mod
     internal class ModData
     {
         public static ModData Instance = new();
-        public Dictionary<string, IMod> Mods = null!;
+        public Dictionary<string, IMod> Mods = null!;   
 
         public async Task FindModsAsync(string path)
         {
@@ -14,11 +14,10 @@ namespace Startran.Mod
                 Mods = new Dictionary<string, IMod>();
                 var manifestFiles = new List<string>();
                 await FindManifestFilesAsync(path, manifestFiles);
-
-                foreach (var mod in manifestFiles.Select(manifestFile => new IMod(manifestFile)))
-                {
-                    Mods.Add(mod.Name, mod);
-                }
+                Mods = manifestFiles
+                    .Select(manifestFile => new IMod(manifestFile))
+                    .Where(mod => mod.Lang.Count > 0 && Directory.Exists(mod.PathS))
+                    .ToDictionary(mod => mod.Name, mod => mod);
             }
             else
             {

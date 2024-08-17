@@ -124,7 +124,7 @@ namespace Startran.Lang {
         }
         
         /// <summary>
-        ///   查找类似 Language: 的本地化字符串。
+        ///   查找类似 Target Language: 的本地化字符串。
         /// </summary>
         internal static string Language {
             get {
@@ -138,6 +138,15 @@ namespace Startran.Lang {
         internal static string ModsFolder {
             get {
                 return ResourceManager.GetString("ModsFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} / {1} items {2} pages 的本地化字符串。
+        /// </summary>
+        internal static string Page {
+            get {
+                return ResourceManager.GetString("Page", resourceCulture);
             }
         }
         

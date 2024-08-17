@@ -11,9 +11,10 @@ namespace Startran.Trans
     {
         public string Name => "OpenAI";
 
-        public async Task<string> StreamCallWithMessage(string text, string role, AppConfig config)
+        public async Task<string> StreamCallWithMessage(string text, string role, AppConfig config, CancellationToken cancellationToken)
         {
             using var httpClient = new HttpClient();
+            httpClient.Timeout = TimeSpan.FromSeconds(30);
             var api = new OpenAIAuthentication(config.ApiConf.Api);
             var url = new OpenAIClientSettings(config.ApiConf.Url);
             var client = new OpenAIClient(api, url, httpClient);
@@ -23,7 +24,13 @@ namespace Startran.Trans
                 new(Role.User, text)
             };
             var chatRequest = new ChatRequest(messages, model: config.ApiConf.Model);
-            var response = await client.ChatEndpoint.GetCompletionAsync(chatRequest);
+
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var response = await client.ChatEndpoint.GetCompletionAsync(chatRequest, cancellationToken)
+                .ConfigureAwait(false);
+
+            cancellationToken.ThrowIfCancellationRequested();
 
             return response.FirstChoice;
         }

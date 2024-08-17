@@ -6,26 +6,35 @@
         <Nullable>enable</Nullable>
         <UseWindowsForms>true</UseWindowsForms>
         <ImplicitUsings>enable</ImplicitUsings>
-        <ApplicationIcon>Asset\startran.ico</ApplicationIcon>
+        <ApplicationIcon>Assets\startran.ico</ApplicationIcon>
 	    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<PublishSingleFile>true</PublishSingleFile>
 	    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
 	    <SelfContained>true</SelfContained>
 	    <UseWPF>True</UseWPF>
 	    <ForceDesignerDPIUnaware>true</ForceDesignerDPIUnaware>
+	    <StartupObject></StartupObject>
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Include="Asset\startran.ico" />
+      <Content Include="Assets\startran.ico" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AntdUI" Version="1.5.1" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="OpenAI-DotNet" Version="8.1.1" />
+      <PackageReference Include="OpenAI-DotNet" Version="8.1.2" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\AntdUI\src\AntdUI\AntdUI.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Assets\Resource.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resource.resx</DependentUpon>
+      </Compile>
       <Compile Update="Lang\Strings.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
@@ -34,6 +43,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Update="Assets\Resource.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
       <EmbeddedResource Update="Lang\Strings.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Strings.Designer.cs</LastGenOutput>

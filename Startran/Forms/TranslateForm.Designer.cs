@@ -79,6 +79,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(200, 240);
             Controls.Add(KeyLabel);
             Controls.Add(SonProgress);

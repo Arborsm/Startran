@@ -1,4 +1,6 @@
+using System.DirectoryServices.ActiveDirectory;
 using System.IO;
+using System.Runtime.InteropServices;
 using AntdUI;
 using Startran.Misc;
 using Startran.Mod;
@@ -6,10 +8,14 @@ using Startran.Trans;
 
 namespace Startran.Forms;
 
-public partial class MainForm : Window
+public partial class MainForm : Form
 {
     private readonly AppConfig _config;
     private readonly Translator _trans;
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    public static extern bool AllocConsole();
 
     public MainForm()
     {
@@ -18,6 +24,10 @@ public partial class MainForm : Window
         menuStrip1.HideImageMargins();
         _config = AppConfig.Load();
         _trans = new Translator(_config);
+        if (_config.Debug)
+        {
+            AllocConsole();
+        }
         directoryTextBox.Text = _config.DirectoryPath;
     }
 
@@ -25,14 +35,25 @@ public partial class MainForm : Window
     {
         var userInput = inputTextBox.Text.Trim();
         inputTextBox.Text = string.Empty;
+        var text = string.Empty;
         if (string.IsNullOrEmpty(userInput)) return;
         MessageTool.Loading(this, "Action in progress..", _ =>
         {
             Thread.Sleep(30000);
         }, Font, 30);
-        var text = await _trans.TranslateText(userInput);
-        MessageTool.SuccessWithBreak(this, $"Copied: {text}");
-        Clipboard.SetText(text);
+        
+        text = await _trans.TranslateText(userInput);
+
+        if (!string.IsNullOrEmpty(text))
+        {
+            MessageTool.SuccessWithBreak(this, $"Copied: {text}");
+            Clipboard.SetText(text);
+        } 
+        else
+        {
+            MessageTool.Error(this, "Unable to translate");
+            new SettingsForm(_config).ShowDialog();
+        }
     }
 
     private async void ProcessButton_Click(object sender, EventArgs e)
@@ -44,8 +65,25 @@ public partial class MainForm : Window
             translateForm.Show();
             await ModData.Instance.FindModsAsync(directoryPath);
             _trans.Form = translateForm;
-            await _trans.ProcessDirectories();
-            MessageTool.Success(this, Lang.Strings.ProcessFinished);
+            var success = false;
+            try
+            {
+                success = await _trans.ProcessDirectories();
+            }
+            catch (Exception ex)
+            {
+                if (ex is OperationCanceledException)
+                {
+                    MessageTool.Info(this, "Stop Translating");
+                }
+                else
+                {
+                    Console.WriteLine(ex.Message);
+                    Notification.error(this, "Error while translating", @$"Unable to get translated result, maybe you need to check you setting!");
+                }
+            }
+
+            if (success) MessageTool.Success(this, Lang.Strings.ProcessFinished);
         }
         else
         {
@@ -76,7 +114,7 @@ public partial class MainForm : Window
         }
     }
 
-    private void settingToolStripMenuItem_Click(object sender, EventArgs e)
+    private void SettingToolStripMenuItem_Click(object sender, EventArgs e)
     {
         var settingsForm = new SettingsForm(_config);
         settingsForm.ShowDialog();
@@ -84,15 +122,16 @@ public partial class MainForm : Window
         directoryTextBox.Text = _config.DirectoryPath;
     }
 
-    private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+    private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
     {
         var aboutBox = new AboutBox();
         aboutBox.ShowDialog();
     }
 
-    private void proofreadToolStripMenuItem_Click(object sender, EventArgs e)
+    private async void ProofreadToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var proofreadForm = new ProofreadForm();
+        await ModData.Instance.FindModsAsync(directoryTextBox.Text.Trim());
+        var proofreadForm = new ProofreadForm(_config);
         proofreadForm.ShowDialog();
     }
 }

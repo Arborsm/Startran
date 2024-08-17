@@ -15,6 +15,8 @@ public class AppConfig
                                          "意译输入文本，不要直接使用原参考文本, " +
                                          "符号组合不需要翻译并务必保留在语句对应的位置，以输入格式直接输出结果。";
     public ApiConfig ApiConf { get; set; } = new();
+    public bool Debug { get; set; } = false;
+
     private static readonly string AppSavingPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "StarTran");
     private static readonly string ConfigFilePath = Path.Combine(AppSavingPath, "config.json");
 

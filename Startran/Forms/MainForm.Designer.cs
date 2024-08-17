@@ -57,7 +57,7 @@ namespace Startran.Forms
             // 
             // directoryTextBox
             // 
-            directoryTextBox.Location = new Point(5, 40);
+            directoryTextBox.Location = new Point(7, 40);
             directoryTextBox.Margin = new Padding(2, 3, 2, 3);
             directoryTextBox.Name = "directoryTextBox";
             directoryTextBox.Size = new Size(352, 23);
@@ -77,10 +77,10 @@ namespace Startran.Forms
             // 
             // processButton
             // 
-            processButton.Location = new Point(293, 124);
+            processButton.Location = new Point(267, 118);
             processButton.Margin = new Padding(2, 3, 2, 3);
             processButton.Name = "processButton";
-            processButton.Size = new Size(73, 25);
+            processButton.Size = new Size(92, 35);
             processButton.TabIndex = 3;
             processButton.Text = Lang.Strings.ProcessButton;
             processButton.UseVisualStyleBackColor = true;
@@ -109,12 +109,12 @@ namespace Startran.Forms
             // SelectFolder
             // 
             SelectFolder.Font = new Font("Microsoft YaHei UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
-            SelectFolder.Location = new Point(0, 125);
+            SelectFolder.Location = new Point(7, 118);
             SelectFolder.Margin = new Padding(2, 3, 2, 3);
             SelectFolder.Name = "SelectFolder";
-            SelectFolder.Size = new Size(73, 25);
+            SelectFolder.Size = new Size(92, 35);
             SelectFolder.TabIndex = 10;
-            SelectFolder.Text = "Select";
+            SelectFolder.Text = "Select Folder";
             SelectFolder.UseVisualStyleBackColor = true;
             SelectFolder.Click += SelectFolder_Click;
             // 
@@ -135,7 +135,7 @@ namespace Startran.Forms
             menuStrip1.Dock = DockStyle.None;
             menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { mainToolStripMenuItem });
-            menuStrip1.Location = new Point(183, 65);
+            menuStrip1.Location = new Point(296, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(5, 2, 0, 2);
             menuStrip1.RenderMode = ToolStripRenderMode.Professional;
@@ -156,29 +156,29 @@ namespace Startran.Forms
             // proofreadToolStripMenuItem
             // 
             proofreadToolStripMenuItem.Name = "proofreadToolStripMenuItem";
-            proofreadToolStripMenuItem.Size = new Size(180, 22);
+            proofreadToolStripMenuItem.Size = new Size(135, 22);
             proofreadToolStripMenuItem.Text = "Proofread";
-            proofreadToolStripMenuItem.Click += proofreadToolStripMenuItem_Click;
+            proofreadToolStripMenuItem.Click += ProofreadToolStripMenuItem_Click;
             // 
             // settingToolStripMenuItem
             // 
             settingToolStripMenuItem.Name = "settingToolStripMenuItem";
-            settingToolStripMenuItem.Size = new Size(180, 22);
+            settingToolStripMenuItem.Size = new Size(135, 22);
             settingToolStripMenuItem.Text = "Setting";
-            settingToolStripMenuItem.Click += settingToolStripMenuItem_Click;
+            settingToolStripMenuItem.Click += SettingToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(180, 22);
+            aboutToolStripMenuItem.Size = new Size(135, 22);
             aboutToolStripMenuItem.Text = "About";
-            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
+            aboutToolStripMenuItem.Click += AboutToolStripMenuItem_Click;
             // 
             // TabControl
             // 
             TabControl.Controls.Add(ProcessPage);
             TabControl.Controls.Add(TranslatePage);
-            TabControl.Location = new Point(5, 0);
+            TabControl.Location = new Point(0, 5);
             TabControl.Name = "TabControl";
             TabControl.SelectedIndex = 0;
             TabControl.Size = new Size(376, 189);
@@ -209,7 +209,7 @@ namespace Startran.Forms
             TranslatePage.Location = new Point(4, 26);
             TranslatePage.Name = "TranslatePage";
             TranslatePage.Padding = new Padding(3);
-            TranslatePage.Size = new Size(368, 244);
+            TranslatePage.Size = new Size(368, 159);
             TranslatePage.TabIndex = 1;
             TranslatePage.Text = "Translate";
             TranslatePage.UseVisualStyleBackColor = true;
@@ -238,7 +238,7 @@ namespace Startran.Forms
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(378, 188);
+            ClientSize = new Size(374, 191);
             Controls.Add(menuStrip1);
             Controls.Add(TabControl);
             FormBorderStyle = FormBorderStyle.FixedSingle;

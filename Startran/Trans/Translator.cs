@@ -3,6 +3,8 @@ using Startran.Forms;
 using System.Collections.Concurrent;
 using System.IO;
 using System.Text;
+using AntdUI;
+using Startran.Misc;
 using Startran.Mod;
 
 namespace Startran.Trans;
@@ -42,14 +44,14 @@ public class Translator
         return str.Any(ch => ch >= 0x4E00 && ch <= 0x9FFF);
     }
 
-    internal async Task<string> TranslateText(string text)
+    internal async Task<string?> TranslateText(string text)
     {
         return ContainsChinese(text) ? text : await TranslateText(text, _config.EnToCn);
     }
 
-    internal async Task<string> TranslateText(string text, string role)
+    internal async Task<string?> TranslateText(string text, string role)
     {
-        return await Apis.First(it => it.Name == _config.ApiSelected).StreamCallWithMessage(text, role, _config);
+        return await Apis.First(it => it.Name == _config.ApiSelected).StreamCallWithMessage(text, role, _config, Form.Tsl.Token);
     }
 
     internal static string GetJsonString(string directoryPath, string fileName)
@@ -60,7 +62,10 @@ public class Translator
         return File.Exists(filePath) ? File.ReadAllText(filePath, Encoding.UTF8) : string.Empty;
     }
 
-    internal async Task<Dictionary<string, string>> ProcessText(Dictionary<string, string> map, Dictionary<string, string>? mapAllCn, string role)
+    internal async Task<Dictionary<string, string>> ProcessText(
+        Dictionary<string, string> map, 
+        Dictionary<string, string>? mapAllCn, 
+        string role)
     {
         mapAllCn ??= new Dictionary<string, string>();
         var processedMap = new ConcurrentDictionary<string, string>();
@@ -73,27 +78,36 @@ public class Translator
             {
                 try
                 {
-                    if (key.Length <= 20)
+                    if (Form.Tsl.IsCancellationRequested) break;
+                    if (map[key].Length <= 20)
                     {
                         await Task.Delay(500);
                     }
                     result = await TranslateText(map[key], role);
+                }
+                catch (OperationCanceledException)
+                {
+                    throw;
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(Lang.Strings.ErrorOccurred + e.Message);
                 }
             } while (result == null);
+
             Console.WriteLine(result);
-            Form.Invoke(Form.SonProgressUpdate(key, result, processedMap.Keys.ToList(), keys));
-            processedMap[key] = result;
+            Form.Invoke(Form.SonProgressUpdate(key, processedMap.Keys.ToList(), keys));
+            if (result != null)
+            {
+                processedMap[key] = result;
+            }
         });
 
         await Task.WhenAll(tasks);
         return processedMap.ToDictionary(k => k.Key, v => v.Value);
     }
 
-    internal async Task ProcessDirectories()
+    internal async Task<bool> ProcessDirectories()
     {
         var i = 0;
         var directories = ModData.Instance.Mods.Select(it => it.Value.PathS).ToArray();
@@ -107,6 +121,7 @@ public class Translator
         });
 
         await Task.WhenAll(tasks);
+        return true;
     }
 
     private async Task ProcessDirectory(string directoryPath)
@@ -116,6 +131,7 @@ public class Translator
 
         var mapAll = JsonConvert.DeserializeObject<Dictionary<string, string>>(en)!;
         var mapAllCn = JsonConvert.DeserializeObject<Dictionary<string, string>>(cn) ?? new Dictionary<string, string>();
+        mapAllCn = mapAllCn.Sort(mapAll);
         var path = Path.Combine(directoryPath, "i18n");
         if (_config.IsSaveSource)
         {
