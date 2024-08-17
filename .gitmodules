@@ -1,0 +1,3 @@
+[submodule "AntdUI"]
+	path = AntdUI
+	url = https://github.com/Arborsm/AntdUI.git
