@@ -31,14 +31,13 @@ namespace Startran.Forms
             TanslateTextLabel = new Label();
             menuStrip1 = new MenuStrip();
             mainToolStripMenuItem = new ToolStripMenuItem();
-            proofreadToolStripMenuItem = new ToolStripMenuItem();
             settingToolStripMenuItem = new ToolStripMenuItem();
-            aboutToolStripMenuItem = new ToolStripMenuItem();
             TabControl = new TabControl();
             ProcessPage = new TabPage();
             TranslatePage = new TabPage();
             AutoCopyLabel = new Label();
             AutoCopySwitch = new AntdUI.Switch();
+            ProofreadButton = new Button();
             menuStrip1.SuspendLayout();
             TabControl.SuspendLayout();
             ProcessPage.SuspendLayout();
@@ -147,32 +146,18 @@ namespace Startran.Forms
             // 
             // mainToolStripMenuItem
             // 
-            mainToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { proofreadToolStripMenuItem, settingToolStripMenuItem, aboutToolStripMenuItem });
+            mainToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { settingToolStripMenuItem });
             mainToolStripMenuItem.Name = "mainToolStripMenuItem";
             mainToolStripMenuItem.RightToLeft = RightToLeft.Yes;
             mainToolStripMenuItem.Size = new Size(65, 21);
             mainToolStripMenuItem.Text = "Main(&A)";
             // 
-            // proofreadToolStripMenuItem
-            // 
-            proofreadToolStripMenuItem.Name = "proofreadToolStripMenuItem";
-            proofreadToolStripMenuItem.Size = new Size(135, 22);
-            proofreadToolStripMenuItem.Text = "Proofread";
-            proofreadToolStripMenuItem.Click += ProofreadToolStripMenuItem_Click;
-            // 
             // settingToolStripMenuItem
             // 
             settingToolStripMenuItem.Name = "settingToolStripMenuItem";
-            settingToolStripMenuItem.Size = new Size(135, 22);
+            settingToolStripMenuItem.Size = new Size(180, 22);
             settingToolStripMenuItem.Text = "Setting";
             settingToolStripMenuItem.Click += SettingToolStripMenuItem_Click;
-            // 
-            // aboutToolStripMenuItem
-            // 
-            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(135, 22);
-            aboutToolStripMenuItem.Text = "About";
-            aboutToolStripMenuItem.Click += AboutToolStripMenuItem_Click;
             // 
             // TabControl
             // 
@@ -186,6 +171,7 @@ namespace Startran.Forms
             // 
             // ProcessPage
             // 
+            ProcessPage.Controls.Add(ProofreadButton);
             ProcessPage.Controls.Add(directoryTextBox);
             ProcessPage.Controls.Add(ModsFolderLabel);
             ProcessPage.Controls.Add(sonLabel);
@@ -232,6 +218,18 @@ namespace Startran.Forms
             AutoCopySwitch.TabIndex = 15;
             AutoCopySwitch.Text = "switch1";
             // 
+            // ProofreadButton
+            // 
+            ProofreadButton.Font = new Font("Microsoft YaHei UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            ProofreadButton.Location = new Point(137, 118);
+            ProofreadButton.Margin = new Padding(2, 3, 2, 3);
+            ProofreadButton.Name = "ProofreadButton";
+            ProofreadButton.Size = new Size(92, 35);
+            ProofreadButton.TabIndex = 11;
+            ProofreadButton.Text = "Proofread";
+            ProofreadButton.UseVisualStyleBackColor = true;
+            ProofreadButton.Click += ProofreadButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -271,7 +269,6 @@ namespace Startran.Forms
         private AntdUI.Switch AutoCopySwitch;
         private Label AutoCopyLabel;
         private ToolStripMenuItem settingToolStripMenuItem;
-        private ToolStripMenuItem aboutToolStripMenuItem;
-        private ToolStripMenuItem proofreadToolStripMenuItem;
+        private Button ProofreadButton;
     }
 }

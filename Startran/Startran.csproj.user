@@ -4,9 +4,6 @@
     <_LastSelectedProfileId>D:\Users\26537\RiderProjects\Startran\Startran\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Forms\AboutBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -15,6 +12,9 @@
     </Compile>
     <Compile Update="Forms\ProofreadForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\ProofreadSetting.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Update="Forms\SettingsForm.cs">
       <SubType>Form</SubType>
@@ -28,6 +28,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Forms\MainForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\ProofreadSetting.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Lang\Strings.resx">

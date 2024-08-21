@@ -171,4 +171,10 @@
   <data name="Translating" xml:space="preserve">
     <value>Translating...</value>
   </data>
+  <data name="TranslationMismatch" xml:space="preserve">
+    <value>Mismatch symbols found. Open proofreading window?</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
 </root>

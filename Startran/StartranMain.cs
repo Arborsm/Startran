@@ -1,11 +1,15 @@
+using System.IO;
 using Startran.Forms;
 
 namespace Startran;
 
-public static class Program
+public static class StartranMain
 {
+    public static readonly string AppSavingPath =
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "StarTran");
+
     /// <summary>
-    ///  The main entry point for the application.
+    ///     The main entry point for the application.
     /// </summary>
     [STAThread]
     private static void Main()

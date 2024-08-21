@@ -1,7 +1,8 @@
-using System.DirectoryServices.ActiveDirectory;
 using System.IO;
 using System.Runtime.InteropServices;
 using AntdUI;
+using Startran.Config;
+using Startran.Lang;
 using Startran.Misc;
 using Startran.Mod;
 using Startran.Trans;
@@ -10,85 +11,175 @@ namespace Startran.Forms;
 
 public partial class MainForm : Form
 {
-    private readonly AppConfig _config;
+    private readonly MainConfig _config;
     private readonly Translator _trans;
-
-    [DllImport("kernel32.dll", SetLastError = true)]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool AllocConsole();
 
     public MainForm()
     {
         StartPosition = FormStartPosition.CenterScreen;
         InitializeComponent();
-        menuStrip1.HideImageMargins();
-        _config = AppConfig.Load();
+
+        _config = ConfigManager<MainConfig>.Load();
         _trans = new Translator(_config);
-        if (_config.Debug)
-        {
-            AllocConsole();
-        }
+
+        if (_config.Debug) AllocConsole();
+
         directoryTextBox.Text = _config.DirectoryPath;
     }
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool AllocConsole();
 
     private async void TranslateButton_Click(object sender, EventArgs e)
     {
         var userInput = inputTextBox.Text.Trim();
-        inputTextBox.Text = string.Empty;
-        var text = string.Empty;
         if (string.IsNullOrEmpty(userInput)) return;
-        MessageTool.Loading(this, "Action in progress..", _ =>
-        {
-            Thread.Sleep(30000);
-        }, Font, 30);
-        
-        text = await _trans.TranslateText(userInput);
 
-        if (!string.IsNullOrEmpty(text))
+        inputTextBox.Text = string.Empty;
+        ShowLoadingIndicator("Translating...");
+
+        var translatedText = await _trans.TranslateText(userInput);
+
+        if (!string.IsNullOrEmpty(translatedText))
         {
-            MessageTool.SuccessWithBreak(this, $"Copied: {text}");
-            Clipboard.SetText(text);
-        } 
+            DisplayTranslationResult(translatedText);
+        }
         else
         {
-            MessageTool.Error(this, "Unable to translate");
-            new SettingsForm(_config).ShowDialog();
+            HandleTranslationError();
         }
+    }
+
+    private void ShowLoadingIndicator(string message)
+    {
+        MessageTool.Loading(this, message, _ => { Thread.Sleep(30000); }, Font, 30);
+    }
+
+    private void DisplayTranslationResult(string text)
+    {
+        MessageTool.SuccessWithBreak(this, $"Copied: {text}");
+        Clipboard.SetText(text);
+    }
+
+    private void HandleTranslationError()
+    {
+        MessageTool.Error(this, "Unable to translate");
+        new SettingsForm(_config).ShowDialog();
     }
 
     private async void ProcessButton_Click(object sender, EventArgs e)
     {
         var directoryPath = directoryTextBox.Text.Trim();
-        if (Directory.Exists(directoryPath))
+        if (!Directory.Exists(directoryPath))
         {
-            var translateForm = new TranslateForm();
-            translateForm.Show();
-            await ModData.Instance.FindModsAsync(directoryPath);
-            _trans.Form = translateForm;
-            var success = false;
-            try
-            {
-                success = await _trans.ProcessDirectories();
-            }
-            catch (Exception ex)
-            {
-                if (ex is OperationCanceledException)
-                {
-                    MessageTool.Info(this, "Stop Translating");
-                }
-                else
-                {
-                    Console.WriteLine(ex.Message);
-                    Notification.error(this, "Error while translating", @$"Unable to get translated result, maybe you need to check you setting!");
-                }
-            }
+            MessageTool.Error(this, Strings.InvalidDirectoryPath);
+            return;
+        }
 
-            if (success) MessageTool.Success(this, Lang.Strings.ProcessFinished);
-        }
-        else
+        await StartProcessingMods(directoryPath);
+    }
+
+    private async Task StartProcessingMods(string directoryPath)
+    {
+        var translateForm = new TranslateForm();
+        translateForm.Show();
+        await LoadMods(directoryPath);
+        _trans.Form = translateForm;
+
+        if (_config.IsBackup)
         {
-            MessageTool.Error(this, Lang.Strings.InvalidDirectoryPath);
+            CreateBackup();
         }
+
+        var result = await ProcessModsAsync();
+
+        if (ModData.Instance.IsMismatchedTokens)
+        {
+            HandleMismatchedTokens();
+        }
+
+        switch (result)
+        {
+            case ProcessResult.Success:
+                MessageTool.Success(this, Strings.ProcessFinished);
+                break;
+            case ProcessResult.Cancel:
+                break;
+            case ProcessResult.Fail:
+            default:
+                translateForm.Close();
+                break;
+        }
+    }
+
+    private async Task LoadMods(string directoryPath)
+    {
+        await ModData.Instance.FindModsAsync(directoryPath, _config);
+    }
+
+    private void CreateBackup()
+    {
+        var tempPath = Path.Combine(Path.GetTempPath(), "StarTans");
+
+        foreach (var mod in ModData.Instance.ProcessMods)
+        {
+            BackupMod(mod, tempPath);
+        }
+
+        var zipFileName = $"backup-{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.zip";
+        tempPath.CreateZipBackup(zipFileName);
+        Directory.Delete(tempPath, true);
+    }
+
+    private static void BackupMod(IMod mod, string tempPath)
+    {
+        var i18NFolderPath = Path.Combine(mod.PathS, "i18n");
+        var files = Directory.GetFiles(i18NFolderPath, "*", SearchOption.AllDirectories);
+
+        var backupPath = Path.Combine(tempPath, mod.Name.SanitizePath(), "i18n");
+        Directory.CreateDirectory(backupPath);
+
+        foreach (var file in files)
+        {
+            var newPath = file.Replace(i18NFolderPath, backupPath);
+            File.Copy(file, newPath, true);
+        }
+    }
+
+    private async Task<ProcessResult> ProcessModsAsync()
+    {
+        try
+        {
+            return await _trans.ProcessDirectories();
+        }
+        catch (OperationCanceledException)
+        {
+            MessageTool.Info(this, "Translation stopped");
+            return ProcessResult.Cancel;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine();
+            NotifyError("Error while translating",
+                "Unable to get translated result. Please check your settings.\n\n" + ex.Message);
+            return ProcessResult.Fail;
+        }
+    }
+
+    private void HandleMismatchedTokens()
+    {
+        var result = MessageBox.Show(Strings.TranslationMismatch, Strings.Warning, MessageBoxButtons.OKCancel);
+        if (result == DialogResult.OK)
+        {
+            var proofreadForm = new ProofreadForm(_config, true);
+            proofreadForm.Show();
+        }
+    }
+
+    private void NotifyError(string title, string message)
+    {
+        Notification.error(this, title, message);
     }
 
     private void InputTextBox_KeyDown(object? sender, KeyEventArgs e)
@@ -102,36 +193,33 @@ public partial class MainForm : Form
 
     private void SelectFolder_Click(object sender, EventArgs e)
     {
-        var folderBrowserDialog1 = new FolderBrowserDialog
+        using var folderBrowserDialog = new FolderBrowserDialog();
+        folderBrowserDialog.ShowNewFolderButton = true;
+        folderBrowserDialog.SelectedPath = directoryTextBox.Text;
+
+        if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
         {
-            ShowNewFolderButton = true,
-            SelectedPath = directoryTextBox.Text
-        };
-        if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-        {
-            directoryTextBox.Text = folderBrowserDialog1.SelectedPath;
-            _config.DirectoryPath = directoryTextBox.Text;
+            UpdateDirectoryPath(folderBrowserDialog.SelectedPath);
         }
+    }
+
+    private void UpdateDirectoryPath(string selectedPath)
+    {
+        directoryTextBox.Text = selectedPath;
+        _config.DirectoryPath = selectedPath;
     }
 
     private void SettingToolStripMenuItem_Click(object sender, EventArgs e)
     {
         var settingsForm = new SettingsForm(_config);
         settingsForm.ShowDialog();
-        _config.Save();
+        ConfigManager<MainConfig>.Save(_config);
         directoryTextBox.Text = _config.DirectoryPath;
     }
 
-    private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+    private async void ProofreadButton_Click(object sender, EventArgs e)
     {
-        var aboutBox = new AboutBox();
-        aboutBox.ShowDialog();
-    }
-
-    private async void ProofreadToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        await ModData.Instance.FindModsAsync(directoryTextBox.Text.Trim());
-        var proofreadForm = new ProofreadForm(_config);
-        proofreadForm.ShowDialog();
+        await ModData.Instance.FindModsAsync(directoryTextBox.Text.Trim(), _config);
+        new ProofreadForm(_config).ShowDialog();
     }
 }

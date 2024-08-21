@@ -156,4 +156,7 @@
   <data name="TranslateButton" xml:space="preserve">
     <value>翻译</value>
   </data>
+  <data name="TranslationMismatch" xml:space="preserve">
+    <value>找到符号不对应的文本，是否打开校对窗口</value>
+  </data>
 </root>

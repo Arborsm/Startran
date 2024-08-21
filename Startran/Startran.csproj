@@ -1,59 +1,59 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <OutputType>WinExe</OutputType>
-        <TargetFramework>net6.0-windows</TargetFramework>
-        <Nullable>enable</Nullable>
-        <UseWindowsForms>true</UseWindowsForms>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <ApplicationIcon>Assets\startran.ico</ApplicationIcon>
-	    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ApplicationIcon>Assets\startran.ico</ApplicationIcon>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<PublishSingleFile>true</PublishSingleFile>
-	    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-	    <SelfContained>true</SelfContained>
-	    <UseWPF>True</UseWPF>
-	    <ForceDesignerDPIUnaware>true</ForceDesignerDPIUnaware>
-	    <StartupObject></StartupObject>
-    </PropertyGroup>
+		<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+		<SelfContained>true</SelfContained>
+		<UseWPF>True</UseWPF>
+		<ForceDesignerDPIUnaware>true</ForceDesignerDPIUnaware>
+		<StartupObject></StartupObject>
+	</PropertyGroup>
 
-    <ItemGroup>
-      <Content Include="Assets\startran.ico" />
-    </ItemGroup>
+	<ItemGroup>
+		<Content Include="Assets\startran.ico" />
+	</ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="OpenAI-DotNet" Version="8.1.2" />
-    </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="OpenAI-DotNet" Version="8.1.2" />
+	</ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\AntdUI\src\AntdUI\AntdUI.csproj" />
-    </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\AntdUI\src\AntdUI\AntdUI.csproj" />
+	</ItemGroup>
 
-    <ItemGroup>
-      <Compile Update="Assets\Resource.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Resource.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Lang\Strings.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Strings.resx</DependentUpon>
-      </Compile>
-    </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Assets\Resource.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resource.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Lang\Strings.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Strings.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-    <ItemGroup>
-      <EmbeddedResource Update="Assets\Resource.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Lang\Strings.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Strings.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Lang\Strings.zh-CN.resx">
-        <Generator></Generator>
-      </EmbeddedResource>
-    </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Assets\Resource.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resource.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Lang\Strings.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Strings.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Lang\Strings.zh-CN.resx">
+			<Generator></Generator>
+		</EmbeddedResource>
+	</ItemGroup>
 
 </Project>

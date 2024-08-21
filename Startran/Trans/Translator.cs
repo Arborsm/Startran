@@ -1,9 +1,8 @@
-﻿using Newtonsoft.Json;
-using Startran.Forms;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.IO;
-using System.Text;
-using AntdUI;
+using Newtonsoft.Json;
+using Startran.Config;
+using Startran.Forms;
 using Startran.Misc;
 using Startran.Mod;
 
@@ -11,21 +10,14 @@ namespace Startran.Trans;
 
 public class Translator
 {
+    private readonly MainConfig _config;
+    public TranslateForm Form { get; set; } = null!;
     public static List<ITranslator> Apis { get; } = new();
-    private readonly AppConfig _config;
-    private const string En = "default.json";
-    private readonly string _cn;
-    private readonly string _cnSource;
-    private readonly string _cnTranslated;
-    public TranslateForm Form = null!;
 
-    public Translator(AppConfig config)
+    public Translator(MainConfig config)
     {
         FindAllApis();
         _config = config;
-        _cn = config.Language + ".json";
-        _cnSource = config.Language + "-Source.json";
-        _cnTranslated = config.Language + "-Translated.json";
     }
 
     private void FindAllApis()
@@ -34,7 +26,7 @@ public class Translator
         foreach (var type in types)
         {
             if (!type.GetInterfaces().Contains(typeof(ITranslator))) continue;
-            var instance = (ITranslator) Activator.CreateInstance(type)!;
+            var instance = (ITranslator)Activator.CreateInstance(type)!;
             Apis.Add(instance);
         }
     }
@@ -49,22 +41,15 @@ public class Translator
         return ContainsChinese(text) ? text : await TranslateText(text, _config.EnToCn);
     }
 
-    internal async Task<string?> TranslateText(string text, string role)
+    internal async Task<string> TranslateText(string text, string role)
     {
-        return await Apis.First(it => it.Name == _config.ApiSelected).StreamCallWithMessage(text, role, _config, Form.Tsl.Token);
-    }
-
-    internal static string GetJsonString(string directoryPath, string fileName)
-    {
-        var i18NDir = Directory.GetDirectories(directoryPath, "i18n", SearchOption.AllDirectories).FirstOrDefault();
-        if (i18NDir == null) return string.Empty;
-        var filePath = Path.Combine(i18NDir, fileName);
-        return File.Exists(filePath) ? File.ReadAllText(filePath, Encoding.UTF8) : string.Empty;
+        return await Apis.First(it => it.Name == _config.ApiSelected)
+            .StreamCallWithMessage(text, role, _config, Form.Tsl.Token);
     }
 
     internal async Task<Dictionary<string, string>> ProcessText(
-        Dictionary<string, string> map, 
-        Dictionary<string, string>? mapAllCn, 
+        Dictionary<string, string> map,
+        Dictionary<string, string>? mapAllCn,
         string role)
     {
         mapAllCn ??= new Dictionary<string, string>();
@@ -73,32 +58,13 @@ public class Translator
         //_main.sonProgressPar.Maximum = keys.Count;
         var tasks = keys.Select(async key =>
         {
-            string? result = null;
-            do
-            {
-                try
-                {
-                    if (Form.Tsl.IsCancellationRequested) break;
-                    if (map[key].Length <= 20)
-                    {
-                        await Task.Delay(500);
-                    }
-                    result = await TranslateText(map[key], role);
-                }
-                catch (OperationCanceledException)
-                {
-                    throw;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(Lang.Strings.ErrorOccurred + e.Message);
-                }
-            } while (result == null);
+            if (map[key].Length <= 20) await Task.Delay(500);
+            var result = await TranslateText(map[key], role);
 
-            Console.WriteLine(result);
-            Form.Invoke(Form.SonProgressUpdate(key, processedMap.Keys.ToList(), keys));
-            if (result != null)
+            if (result != string.Empty)
             {
+                Console.WriteLine(result);
+                Form.Invoke(Form.SonProgressUpdate(key, processedMap.Keys.ToList(), keys));
                 processedMap[key] = result;
             }
         });
@@ -107,10 +73,10 @@ public class Translator
         return processedMap.ToDictionary(k => k.Key, v => v.Value);
     }
 
-    internal async Task<bool> ProcessDirectories()
+    internal async Task<ProcessResult> ProcessDirectories()
     {
         var i = 0;
-        var directories = ModData.Instance.Mods.Select(it => it.Value.PathS).ToArray();
+        var directories = ModData.Instance.ProcessMods.Select(it => it.PathS).ToArray();
         var maximum = (float) directories.Length;
 
         var tasks = directories.Select(async directory =>
@@ -121,31 +87,28 @@ public class Translator
         });
 
         await Task.WhenAll(tasks);
-        return true;
+        return ProcessResult.Success;
     }
 
     private async Task ProcessDirectory(string directoryPath)
     {
-        var en = GetJsonString(directoryPath, En);
-        var cn = GetJsonString(directoryPath, _cn);
-
-        var mapAll = JsonConvert.DeserializeObject<Dictionary<string, string>>(en)!;
-        var mapAllCn = JsonConvert.DeserializeObject<Dictionary<string, string>>(cn) ?? new Dictionary<string, string>();
-        mapAllCn = mapAllCn.Sort(mapAll);
+        var target = _config.Language + ".json";
+        var defaultLang = directoryPath.GetDefaultLang();
+        var targetLang = directoryPath.GetTargetLang(target);
+        targetLang = targetLang.Sort(defaultLang);
         var path = Path.Combine(directoryPath, "i18n");
-        if (_config.IsSaveSource)
+
+        var tran = await ProcessText(defaultLang, targetLang, _config.EnToCn);
+
+        if (defaultLang.IsMismatchedTokens(tran))
         {
-            await File.WriteAllTextAsync(Path.Combine(path, _cnSource), cn);
+            ModData.Instance.IsMismatchedTokens = true;
         }
 
-        var tran = await ProcessText(mapAll, mapAllCn, _config.EnToCn);
+        var combined = targetLang
+            .Union(tran, new KeyValuePairComparer<string, string>())
+            .ToDictionary(k => k.Key, v => v.Value);
 
-        if (_config.IsSaveTranslated)
-        {
-            await File.WriteAllTextAsync(Path.Combine(path, _cnTranslated), JsonConvert.SerializeObject(tran));
-        }
-
-        var combined = mapAllCn.Union(tran).ToDictionary(k => k.Key, v => v.Value);
-        await File.WriteAllTextAsync(Path.Combine(path, _cn), JsonConvert.SerializeObject(combined));
+        await File.WriteAllTextAsync(Path.Combine(path, target), JsonConvert.SerializeObject(combined));
     }
 }

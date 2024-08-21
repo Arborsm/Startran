@@ -29,31 +29,25 @@
         private void InitializeComponent()
         {
             panel1 = new AntdUI.Panel();
-            windowBar1 = new AntdUI.WindowBar();
-            SaveButton = new AntdUI.Button();
             dropdown = new AntdUI.Dropdown();
-            checkVisibleHeader = new AntdUI.Checkbox();
-            checkEnableHeaderResizing = new AntdUI.Checkbox();
-            checkSetRowStyle = new AntdUI.Checkbox();
-            checkBordered = new AntdUI.Checkbox();
-            checkOrder = new AntdUI.Checkbox();
+            windowBar1 = new AntdUI.WindowBar();
+            popoverButton = new AntdUI.Button();
+            SaveButton = new AntdUI.Button();
             doToolTip = new AntdUI.Switch();
+            label = new Label();
             pagination = new AntdUI.Pagination();
             table = new AntdUI.Table();
             panel1.SuspendLayout();
-            windowBar1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.Controls.Add(dropdown);
             panel1.Controls.Add(windowBar1);
-            panel1.Controls.Add(checkEnableHeaderResizing);
-            panel1.Controls.Add(checkSetRowStyle);
-            panel1.Controls.Add(checkOrder);
-            panel1.Controls.Add(checkBordered);
-            panel1.Controls.Add(checkVisibleHeader);
+            panel1.Controls.Add(popoverButton);
+            panel1.Controls.Add(SaveButton);
             panel1.Controls.Add(doToolTip);
+            panel1.Controls.Add(label);
             panel1.Dock = DockStyle.Top;
             panel1.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             panel1.Location = new Point(0, 0);
@@ -63,129 +57,91 @@
             panel1.TabIndex = 1;
             panel1.Text = "panel1";
             // 
-            // windowBar1
-            // 
-            windowBar1.BackColor = Color.White;
-            windowBar1.Controls.Add(SaveButton);
-            windowBar1.Dock = DockStyle.Right;
-            windowBar1.Location = new Point(981, 0);
-            windowBar1.Name = "windowBar1";
-            windowBar1.ShowIcon = false;
-            windowBar1.Size = new Size(203, 43);
-            windowBar1.TabIndex = 2;
-            windowBar1.Text = " ";
-            // 
-            // SaveButton
-            // 
-            SaveButton.Dock = DockStyle.Right;
-            SaveButton.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            SaveButton.Ghost = true;
-            SaveButton.Location = new Point(-133, 0);
-            SaveButton.Name = "SaveButton";
-            SaveButton.Radius = 0;
-            SaveButton.ImageSvg = Assets.Resource.Save;
-            SaveButton.Size = new Size(50, 43);
-            SaveButton.TabIndex = 6;
-            SaveButton.WaveSize = 0;
-            SaveButton.Click += SaveButton_Click;
-            // 
             // dropdown
             // 
             dropdown.Dock = DockStyle.Right;
-            dropdown.IsLink = true;
             dropdown.DropDownArrow = true;
-            dropdown.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dropdown.Name = "dropdown";
+            dropdown.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            dropdown.IsLink = true;
+            dropdown.Location = new Point(730, 0);
             dropdown.MaxCount = 12;
+            dropdown.Name = "dropdown";
             dropdown.Radius = 0;
             dropdown.Size = new Size(300, 43);
             dropdown.TabIndex = 7;
             dropdown.SelectedValueChanged += DropdownOnSelectedValueChanged;
             // 
-            // checkVisibleHeader
+            // windowBar1
             // 
-            checkVisibleHeader.AutoCheck = true;
-            checkVisibleHeader.BackColor = Color.White;
-            checkVisibleHeader.Checked = true;
-            checkVisibleHeader.Dock = DockStyle.Left;
-            checkVisibleHeader.Location = new Point(741, 0);
-            checkVisibleHeader.Name = "checkVisibleHeader";
-            checkVisibleHeader.Size = new Size(110, 43);
-            checkVisibleHeader.TabIndex = 6;
-            checkVisibleHeader.Text = "显示表头";
-            checkVisibleHeader.CheckedChanged += CheckVisibleHeader_CheckedChanged;
+            windowBar1.BackColor = Color.White;
+            windowBar1.Dock = DockStyle.Right;
+            windowBar1.Location = new Point(1030, 0);
+            windowBar1.Name = "windowBar1";
+            windowBar1.ShowIcon = false;
+            windowBar1.Size = new Size(154, 43);
+            windowBar1.TabIndex = 2;
+            windowBar1.Text = " ";
             // 
-            // checkEnableHeaderResizing
+            // popoverButton
             // 
-            checkEnableHeaderResizing.AutoCheck = true;
-            checkEnableHeaderResizing.BackColor = Color.White;
-            checkEnableHeaderResizing.Dock = DockStyle.Left;
-            checkEnableHeaderResizing.Location = new Point(563, 0);
-            checkEnableHeaderResizing.Name = "checkEnableHeaderResizing";
-            checkEnableHeaderResizing.Size = new Size(165, 43);
-            checkEnableHeaderResizing.TabIndex = 5;
-            checkEnableHeaderResizing.Text = "手动调整列头宽度";
-            checkEnableHeaderResizing.CheckedChanged += CheckEnableHeaderResizing_CheckedChanged;
+            popoverButton.Dock = DockStyle.Left;
+            popoverButton.Font = new Font("Microsoft YaHei UI", 22.2F, FontStyle.Regular, GraphicsUnit.Point);
+            popoverButton.Ghost = true;
+            popoverButton.ImageSvg = Assets.Resource.Setting;
+            popoverButton.Location = new Point(305, 0);
+            popoverButton.Name = "popoverButton";
+            popoverButton.Radius = 0;
+            popoverButton.Size = new Size(50, 43);
+            popoverButton.TabIndex = 5;
+            popoverButton.WaveSize = 0;
+            popoverButton.Click += PopoverButton_Click;
             // 
-            // checkSetRowStyle
+            // SaveButton
             // 
-            checkSetRowStyle.AutoCheck = true;
-            checkSetRowStyle.BackColor = Color.White;
-            checkSetRowStyle.Dock = DockStyle.Left;
-            checkSetRowStyle.Location = new Point(466, 0);
-            checkSetRowStyle.Name = "checkSetRowStyle";
-            checkSetRowStyle.Size = new Size(95, 43);
-            checkSetRowStyle.TabIndex = 3;
-            checkSetRowStyle.Text = "奇偶列";
-            checkSetRowStyle.CheckedChanged += CheckSetRowStyle_CheckedChanged;
-            // 
-            // checkBordered
-            // 
-            checkBordered.AutoCheck = true;
-            checkBordered.BackColor = Color.White;
-            checkBordered.Dock = DockStyle.Left;
-            checkBordered.Location = new Point(339, 0);
-            checkBordered.Name = "checkBordered";
-            checkBordered.Size = new Size(125, 43);
-            checkBordered.TabIndex = 2;
-            checkBordered.Text = "显示列边框";
-            checkBordered.CheckedChanged += CheckBordered_CheckedChanged;
-            // 
-            // checkOrder
-            // 
-            checkOrder.AutoCheck = true;
-            checkOrder.BackColor = Color.White;
-            checkOrder.Checked = false;
-            checkOrder.Dock = DockStyle.Left;
-            checkOrder.Location = new Point(90, 0);
-            checkOrder.Name = "checkOrder";
-            checkOrder.Size = new Size(110, 43);
-            checkOrder.TabIndex = 0;
-            checkOrder.Text = "启用排列";
-            checkOrder.CheckedChanged += CheckOrderCheckedChanged;
+            SaveButton.Dock = DockStyle.Left;
+            SaveButton.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            SaveButton.Ghost = true;
+            SaveButton.ImageSvg = Assets.Resource.Save;
+            SaveButton.Location = new Point(255, 0);
+            SaveButton.Name = "SaveButton";
+            SaveButton.Radius = 0;
+            SaveButton.Size = new Size(50, 43);
+            SaveButton.TabIndex = 6;
+            SaveButton.WaveSize = 0;
+            SaveButton.Click += SaveButton_Click;
             // 
             // doToolTip
             // 
             doToolTip.AutoCheck = true;
             doToolTip.BackColor = Color.White;
             doToolTip.Dock = DockStyle.Left;
-            doToolTip.Location = new Point(10, 0);
+            doToolTip.Location = new Point(175, 0);
             doToolTip.Name = "doToolTip";
             doToolTip.Size = new Size(80, 43);
             doToolTip.TabIndex = 4;
-            doToolTip.Text = "浮窗显示";
             doToolTip.CheckedChanged += DoToolTipCheckedChanged;
+            // 
+            // label
+            // 
+            label.BackColor = Color.White;
+            label.Dock = DockStyle.Left;
+            label.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            label.Location = new Point(10, 0);
+            label.Name = "label";
+            label.Size = new Size(165, 43);
+            label.TabIndex = 3;
+            label.Text = "Tooltip Mode";
+            label.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pagination
             // 
             pagination.BackColor = Color.White;
             pagination.Dock = DockStyle.Bottom;
             pagination.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            pagination.Location = new Point(1184, 727);
+            pagination.Location = new Point(0, 727);
             pagination.Name = "pagination";
             pagination.RightToLeft = RightToLeft.Yes;
             pagination.ShowSizeChanger = true;
-            //pagination.MaximumSize = new Size(600, 34);
             pagination.Size = new Size(1184, 34);
             pagination.TabIndex = 1;
             pagination.ValueChanged += PaginationValueChanged;
@@ -217,19 +173,15 @@
             Name = "ProofreadForm";
             Closed += CloseForm;
             panel1.ResumeLayout(false);
-            windowBar1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-        private AntdUI.Table table;
-        private AntdUI.Pagination pagination;
+        internal AntdUI.Table table;
+        internal AntdUI.Pagination pagination;
         private AntdUI.Panel panel1;
-        private AntdUI.Checkbox checkOrder;
-        private AntdUI.Checkbox checkEnableHeaderResizing;
-        private AntdUI.Checkbox checkSetRowStyle;
-        private AntdUI.Checkbox checkBordered;
-        private AntdUI.Checkbox checkVisibleHeader;
+        private AntdUI.Button popoverButton;
+        private Label label;
         private AntdUI.Switch doToolTip;
         private AntdUI.Button SaveButton;
         private AntdUI.WindowBar windowBar1;

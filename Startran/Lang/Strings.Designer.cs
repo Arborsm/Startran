@@ -221,5 +221,23 @@ namespace Startran.Lang {
                 return ResourceManager.GetString("Translating", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 Mismatch symbols found. Open proofreading window? 的本地化字符串。
+        /// </summary>
+        internal static string TranslationMismatch {
+            get {
+                return ResourceManager.GetString("TranslationMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Warning 的本地化字符串。
+        /// </summary>
+        internal static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
     }
 }
