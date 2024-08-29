@@ -35,26 +35,27 @@ namespace Startran.Forms
             base.OnPaint(pe);
         }
 
-        private void IsOrderCheckedChanged(object sender, bool value)
+        private void IsOrderCheckedChanged(object sender, BoolEventArgs boolEventArgs)
         {
-            _form.table.Columns?.ForEach(it => it.SortOrder = value);
+            _form.table.Columns?.ForEach(it => it.SortOrder = boolEventArgs.Value);
         }
 
-        private void IsBorderedCheckedChanged(object sender, bool value)
+        private void IsBorderedCheckedChanged(object sender, BoolEventArgs boolEventArgs)
         {
+            var value = boolEventArgs.Value;
             _form.table.Bordered = value;
         }
 
-        private void IsSetRowStyleCheckedChanged(object sender, bool value)
+        private void IsSetRowStyleCheckedChanged(object sender, BoolEventArgs boolEventArgs)
         {
-            if (value) _form.table.SetRowStyle += Table_SetRowStyle;
+            if (boolEventArgs.Value) _form.table.SetRowStyle += Table_SetRowStyle;
             else _form.table.SetRowStyle -= Table_SetRowStyle;
             _form.table.Invalidate();
         }
 
-        private Table.CellStyleInfo? Table_SetRowStyle(object? sender, object? record, int rowIndex)
+        private Table.CellStyleInfo? Table_SetRowStyle(object sender, TableSetRowStyleEventArgs tableSetRowStyleEventArgs)
         {
-            if (rowIndex % 2 == 0)
+            if (tableSetRowStyleEventArgs.RowIndex % 2 == 0)
                 return new Table.CellStyleInfo
                 {
                     BackColor = Style.Db.ErrorBg,
@@ -63,19 +64,19 @@ namespace Startran.Forms
             return null;
         }
 
-        private void IsEnableHeaderResizingCheckedChanged(object sender, bool value)
+        private void IsEnableHeaderResizingCheckedChanged(object sender, BoolEventArgs boolEventArgs)
         {
-            _form.table.EnableHeaderResizing = value;
+            _form.table.EnableHeaderResizing = boolEventArgs.Value;
         }
 
-        private void IsVisibleHeaderCheckedChanged(object sender, bool value)
+        private void IsVisibleHeaderCheckedChanged(object sender, BoolEventArgs boolEventArgs)
         {
-            _form.table.VisibleHeader = value;
+            _form.table.VisibleHeader = boolEventArgs.Value;
         }
 
-        private void IsFilterCheckedChanged(object sender, bool value)
+        private void IsFilterCheckedChanged(object sender, BoolEventArgs boolEventArgs)
         {
-            _form.SetFilter(value);
+            _form.SetFilter(boolEventArgs.Value);
         }
 
         public void OnClosing(object? sender, CancelEventArgs e)

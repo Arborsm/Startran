@@ -196,14 +196,16 @@ public partial class ProofreadForm : Window
         return pagedList;
     }
 
-    private void PaginationValueChanged(int current, int total, int pageSize, int pageTotal)
+    private void PaginationValueChanged(object sender, PagePageEventArgs pagePageEventArgs)
     {
+        var (current, pageSize) = (pagePageEventArgs.Current, pagePageEventArgs.PageSize);
         table.DataSource = GetPageData(current, pageSize);
         if (_isFilter) InitPagination();
     }
 
-    private string PaginationShowTotalChanged(int current, int total, int pageSize, int pageTotal)
+    private string PaginationShowTotalChanged(object sender, PagePageEventArgs pagePageEventArgs)
     {
+        var (current, pageSize, total, pageTotal) = (pagePageEventArgs.Current, pagePageEventArgs.PageSize, pagePageEventArgs.Total, pagePageEventArgs.PageTotal);
         return string.Format(Strings.Page, Math.Min(pageSize * current, total), total, Math.Max(0, pageTotal));
     }
 
@@ -216,10 +218,10 @@ public partial class ProofreadForm : Window
         SaveMap();
     }
 
-    private void DropdownOnSelectedValueChanged(object sender, object? value)
+    private void DropdownOnSelectedValueChanged(object sender, ObjectNEventArgs args)
     {
         CheckSave();
-        var mod = value!.ToString()!;
+        var mod = args.Value!.ToString()!;
         dropdown.Text = mod;
         _currentMod = ModData.Instance.Mods[mod];
         var (defaultLang, targetLang) = _currentMod.ReadMap(_config.Language);
@@ -228,9 +230,9 @@ public partial class ProofreadForm : Window
         InitPagination();
     }
 
-    private void TableOnCellBeginEditInputStyle(object sender, object? value, object? record, int rowIndex,
-        int columnIndex, ref Input input)
+    private void TableOnCellBeginEditInputStyle(object sender, TableBeginEditInputStyleEventArgs tableBeginEditInputStyleEventArgs)
     {
+        var input = tableBeginEditInputStyleEventArgs.Input;
         var sizeHeight = input.Size.Height;
         var height = sizeHeight;
         height = height <= 55 ? 55 : height <= 80 ? 80 : height;
@@ -239,18 +241,20 @@ public partial class ProofreadForm : Window
         input.Size = input.Size with { Height = height };
     }
 
-    private void TableOnCellDoubleClick(object sender, MouseEventArgs args, object? record, int rowIndex,
-        int columnIndex, Rectangle rect)
+    private void TableOnCellDoubleClick(object sender, TableClickEventArgs tableClickEventArgs)
     {
-        _tooltipForm?.Show(this);
-        table.EnterEditMode(rowIndex, columnIndex);
+        if (_showToolTip)
+        {
+            _tooltipForm?.Show(this);
+        }
+        table.EnterEditMode(tableClickEventArgs.RowIndex, tableClickEventArgs.ColumnIndex);
         _isFinish = true;
     }
 
-    private bool TableOnCellEndEdit(object sender, string value, object? record, int rowIndex, int columnIndex)
+    private bool TableOnCellEndEdit(object sender, TableEndEditEventArgs tableEndEditEventArgs)
     {
-        var key = table.rows![rowIndex].cells[0].ToString()!;
-        _targetLang[key] = value;
+        var key = table.rows![tableEndEditEventArgs.RowIndex].cells[0].ToString()!;
+        _targetLang[key] = tableEndEditEventArgs.Value;
         _isSave = false;
         return true;
     }
@@ -324,8 +328,9 @@ public partial class ProofreadForm : Window
         }
     }
 
-    private void DoToolTipCheckedChanged(object sender, bool value)
+    private void DoToolTipCheckedChanged(object sender, BoolEventArgs boolEventArgs)
     {
+        var value = boolEventArgs.Value;
         _showToolTip = value;
         table.Columns![1].Visible = !value;
     }
