@@ -1,4 +1,6 @@
-﻿namespace Startran.Forms
+﻿using Startran.Lang;
+
+namespace Startran.Forms
 {
     partial class TranslateForm
     {
@@ -43,7 +45,7 @@
             windowBar1.ShowIcon = false;
             windowBar1.Size = new Size(200, 23);
             windowBar1.TabIndex = 0;
-            windowBar1.Text = "Translating...";
+            windowBar1.Text = Strings.Translating;
             // 
             // MainProgress
             // 
@@ -86,7 +88,7 @@
             Controls.Add(MainProgress);
             Controls.Add(windowBar1);
             Name = "TranslateForm";
-            Text = "Form1";
+            //Text = "Form1";
             ResumeLayout(false);
             PerformLayout();
         }

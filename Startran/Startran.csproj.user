@@ -7,7 +7,7 @@
     <Compile Update="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\OpenAISettingForm.cs">
+    <Compile Update="Forms\ApiSettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\ProofreadForm.cs">
@@ -39,7 +39,7 @@
     <EmbeddedResource Update="Lang\Strings.zh-CN.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Update="Forms\OpenAISettingForm.resx">
+    <EmbeddedResource Update="Forms\ApiSettingForm.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

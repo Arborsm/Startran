@@ -22,6 +22,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="OllamaSharp" Version="3.0.0" />
 		<PackageReference Include="OpenAI-DotNet" Version="8.1.2" />
 	</ItemGroup>
 

@@ -34,13 +34,13 @@ public partial class ProofreadForm : Window
         table.ShowTip = false;
         table.Columns = new ColumnCollection
         {
-            new(nameof(Mod.LangKey), "Lang Key", ColumnAlign.Center)
+            new(nameof(Mod.LangKey), Strings.LangKey, ColumnAlign.Center)
                 { LineBreak = true, Width = (Width * 0.18).ToStringI() },
-            new(nameof(Mod.DefaultLang), "Default Lang", ColumnAlign.Center)
+            new(nameof(Mod.DefaultLang), Strings.DefaultLang, ColumnAlign.Center)
                 { LineBreak = true, Width = (Width * 0.37).ToStringI() },
-            new(nameof(Mod.TargetLang), "Target Lang", ColumnAlign.Center)
+            new(nameof(Mod.TargetLang), Strings.TargetLang, ColumnAlign.Center)
                 { LineBreak = true, Width = (Width * 0.37).ToStringI() },
-            new(nameof(Mod.Symbol), "Symbol", ColumnAlign.Center) { Width = (Width * 0.08).ToStringI() }
+            new(nameof(Mod.Symbol), Strings.Symbol, ColumnAlign.Center) { Width = (Width * 0.08).ToStringI() }
         };
         InitPagination();
     }
@@ -120,7 +120,7 @@ public partial class ProofreadForm : Window
         }
         else
         {
-            AntdUI.Modal.open(this, Strings.Error, "无法在目标文件夹找到符合要求的模组", TType.Error);
+            AntdUI.Modal.open(this, Strings.Error, Strings.ErrorFoldersMsg, TType.Error);
             Close();
         }
 
@@ -263,7 +263,7 @@ public partial class ProofreadForm : Window
     private void CheckSave()
     {
         if (_isSave) return;
-        var result = AntdUI.Modal.open(this, "Warning", "没有进行保存，是否需要保存更改", TType.Warn);
+        var result = AntdUI.Modal.open(this, Strings.Warning, Strings.IfSaveBeforeClose, TType.Warn);
         if (result == DialogResult.OK) SaveMap();
     }
 

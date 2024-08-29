@@ -1,18 +1,19 @@
 ﻿using System.ComponentModel;
-using System.Net.Http;
-using OpenAI;
 using Startran.Config;
 using Startran.Lang;
+using Startran.Trans;
 
 namespace Startran.Forms;
 
-public partial class OpenAiSettingForm : Form
+public partial class ApiSettingForm : Form
 {
     private readonly MainConfig _config;
+    private readonly Translator _trans;
 
-    public OpenAiSettingForm(MainConfig config)
+    public ApiSettingForm(MainConfig config, Translator trans)
     {
         _config = config;
+        _trans = trans;
         StartPosition = FormStartPosition.CenterScreen;
         InitializeComponent();
         SaveButton.Focus();
@@ -28,10 +29,10 @@ public partial class OpenAiSettingForm : Form
     {
         _config.ApiConf.Api = ApiTextBox.Text;
         _config.ApiConf.Url = UrlTextBox.Text;
-        _config.ApiConf.Model = ModelsComboBox.SelectedItem!.ToString()!;
+        if (ModelsComboBox.SelectedItem != null) _config.ApiConf.Model = ModelsComboBox.SelectedItem.ToString()!;
         _config.ApiConf.Models.Clear();
-        foreach (var item in ModelsComboBox.Items) _config.ApiConf.Models.Add(item.ToString()!);
-        ConfigManager<MainConfig>.Save(_config);
+        foreach (var item in ModelsComboBox.Items) _config.ApiConf.Models.Add(item.ToString() ?? string.Empty);
+        ConfigManager<ApiConfig>.Save(_config.ApiConf, _config.ApiSelected);
     }
 
     private void OpenAISettingForm_Load(object? sender, EventArgs e)
@@ -40,6 +41,10 @@ public partial class OpenAiSettingForm : Form
         UrlTextBox.Text = _config.ApiConf.Url;
         ModelsComboBox.Items.AddRange(_config.ApiConf.Models.ToArray<object>());
         ModelsComboBox.SelectedItem = _config.ApiConf.Model;
+        if (_trans.CurrentTranslator.NeedApi) return;
+        ApiTextBox.Text = Strings.Unavailable;
+        ApiTextBox.ReadOnly = true;
+        ApiTextBox.UseSystemPasswordChar = false;
     }
 
     private async void RefreshButton_Click(object? sender, EventArgs e)
@@ -47,12 +52,7 @@ public partial class OpenAiSettingForm : Form
         Save();
         try
         {
-            using var httpClient = new HttpClient();
-            var api = new OpenAIAuthentication(_config.ApiConf.Api);
-            var url = new OpenAIClientSettings(_config.ApiConf.Url);
-            var client = new OpenAIClient(api, url, httpClient);
-            var models = await client.ModelsEndpoint.GetModelsAsync();
-            var list = models.Select(it => it.ToString()).ToList();
+            var list = await _trans.CurrentTranslator.GetSupportModels(_config);
             ModelsComboBox.Items.Clear();
             ModelsComboBox.Items.AddRange(list.ToArray<object>());
         }
@@ -70,7 +70,7 @@ public partial class OpenAiSettingForm : Form
     /// </summary>
     private void InitializeComponent()
     {
-        var resources = new ComponentResourceManager(typeof(OpenAiSettingForm));
+        var resources = new ComponentResourceManager(typeof(ApiSettingForm));
         modelLabel = new Label();
         urlLabel = new Label();
         apiLabel = new Label();
@@ -85,16 +85,19 @@ public partial class OpenAiSettingForm : Form
         // 
         resources.ApplyResources(modelLabel, "modelLabel");
         modelLabel.Name = "modelLabel";
+        modelLabel.Text = Strings.Model;
         // 
         // urlLabel
         // 
         resources.ApplyResources(urlLabel, "urlLabel");
         urlLabel.Name = "urlLabel";
+        urlLabel.Text = Strings.Url;
         // 
         // apiLabel
         // 
         resources.ApplyResources(apiLabel, "apiLabel");
         apiLabel.Name = "apiLabel";
+        apiLabel.Text = Strings.Api;
         // 
         // ModelsComboBox
         // 
@@ -127,6 +130,7 @@ public partial class OpenAiSettingForm : Form
         SaveButton.Name = "SaveButton";
         SaveButton.UseVisualStyleBackColor = true;
         SaveButton.Click += SaveButton_Click;
+        SaveButton.Text = Strings.Save;
         // 
         // RefreshButton
         // 
@@ -134,8 +138,9 @@ public partial class OpenAiSettingForm : Form
         RefreshButton.Name = "RefreshButton";
         RefreshButton.UseVisualStyleBackColor = true;
         RefreshButton.Click += RefreshButton_Click;
+        RefreshButton.Text = Strings.Refresh;
         // 
-        // OpenAiSettingForm
+        // ApiSettingForm
         // 
         resources.ApplyResources(this, "$this");
         AutoScaleMode = AutoScaleMode.Font;
@@ -147,8 +152,9 @@ public partial class OpenAiSettingForm : Form
         Controls.Add(ModelsComboBox);
         Controls.Add(UrlTextBox);
         Controls.Add(ApiTextBox);
-        Name = "OpenAiSettingForm";
+        Name = "ApiSettingForm";
         Load += OpenAISettingForm_Load;
+        Text = Strings.ApiSetting;
         ShowIcon = false;
         ResumeLayout(false);
         PerformLayout();

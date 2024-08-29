@@ -1,4 +1,6 @@
-﻿namespace Startran.Forms
+﻿using Startran.Lang;
+
+namespace Startran.Forms
 {
     partial class ProofreadForm
     {
@@ -55,7 +57,7 @@
             panel1.Padding = new Padding(10, 0, 0, 0);
             panel1.Size = new Size(1184, 43);
             panel1.TabIndex = 1;
-            panel1.Text = "panel1";
+            //panel1.Text = "panel1";
             // 
             // dropdown
             // 
@@ -87,7 +89,7 @@
             popoverButton.Dock = DockStyle.Left;
             popoverButton.Font = new Font("Microsoft YaHei UI", 22.2F, FontStyle.Regular, GraphicsUnit.Point);
             popoverButton.Ghost = true;
-            popoverButton.ImageSvg = Assets.Resource.Setting;
+            popoverButton.IconSvg = Assets.Resource.Setting;
             popoverButton.Location = new Point(305, 0);
             popoverButton.Name = "popoverButton";
             popoverButton.Radius = 0;
@@ -101,7 +103,7 @@
             SaveButton.Dock = DockStyle.Left;
             SaveButton.Font = new Font("Microsoft YaHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             SaveButton.Ghost = true;
-            SaveButton.ImageSvg = Assets.Resource.Save;
+            SaveButton.IconSvg = Assets.Resource.Save;
             SaveButton.Location = new Point(255, 0);
             SaveButton.Name = "SaveButton";
             SaveButton.Radius = 0;
@@ -130,7 +132,7 @@
             label.Name = "label";
             label.Size = new Size(165, 43);
             label.TabIndex = 3;
-            label.Text = "Tooltip Mode";
+            label.Text = Strings.TooltipMode;
             label.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pagination

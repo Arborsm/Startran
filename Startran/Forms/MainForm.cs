@@ -37,7 +37,7 @@ public partial class MainForm : Form
         if (string.IsNullOrEmpty(userInput)) return;
 
         inputTextBox.Text = string.Empty;
-        ShowLoadingIndicator("Translating...");
+        ShowLoadingIndicator(Strings.Translating);
 
         var translatedText = await _trans.TranslateText(userInput);
 
@@ -58,14 +58,14 @@ public partial class MainForm : Form
 
     private void DisplayTranslationResult(string text)
     {
-        MessageTool.SuccessWithBreak(this, $"Copied: {text}");
+        MessageTool.SuccessWithBreak(this, string.Format(Strings.Copid, text));
         Clipboard.SetText(text);
     }
 
     private void HandleTranslationError()
     {
-        MessageTool.Error(this, "Unable to translate");
-        new SettingsForm(_config).ShowDialog();
+        MessageTool.Error(this, Strings.UnableTrans);
+        new SettingsForm(_config, _trans).ShowDialog();
     }
 
     private async void ProcessButton_Click(object sender, EventArgs e)
@@ -155,14 +155,14 @@ public partial class MainForm : Form
         }
         catch (OperationCanceledException)
         {
-            MessageTool.Info(this, "Translation stopped");
+            MessageTool.Info(this, Strings.TranslationStopped);
             return ProcessResult.Cancel;
         }
         catch (Exception ex)
         {
             Console.WriteLine();
-            NotifyError("Error while translating",
-                "Unable to get translated result. Please check your settings.\n\n" + ex.Message);
+            NotifyError(Strings.ErrorTranslating,
+                Strings.ErrorTranslatingMsg + ex.Message);
             return ProcessResult.Fail;
         }
     }
@@ -207,11 +207,12 @@ public partial class MainForm : Form
     {
         directoryTextBox.Text = selectedPath;
         _config.DirectoryPath = selectedPath;
+        ConfigManager<MainConfig>.Save(_config);
     }
 
     private void SettingToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var settingsForm = new SettingsForm(_config);
+        var settingsForm = new SettingsForm(_config, _trans);
         settingsForm.ShowDialog();
         ConfigManager<MainConfig>.Save(_config);
         directoryTextBox.Text = _config.DirectoryPath;

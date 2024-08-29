@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json;
 using Startran.Config;
@@ -11,13 +12,21 @@ namespace Startran.Trans;
 public class Translator
 {
     private readonly MainConfig _config;
-    public TranslateForm Form { get; set; } = null!;
-    public static List<ITranslator> Apis { get; } = new();
+    public TranslateForm? Form { get; set; } = null;
+    public List<ITranslator> Apis { get; } = new();
+    public ITranslator CurrentTranslator;
 
     public Translator(MainConfig config)
     {
         FindAllApis();
         _config = config;
+        CurrentTranslator = UpdateConfig();
+    }
+
+    public ITranslator UpdateConfig()
+    {
+        _config.ApiConf = ConfigManager<ApiConfig>.Load(_config.ApiSelected);
+        return Apis.First(it => it.Name == _config.ApiSelected);
     }
 
     private void FindAllApis()
@@ -26,7 +35,7 @@ public class Translator
         foreach (var type in types)
         {
             if (!type.GetInterfaces().Contains(typeof(ITranslator))) continue;
-            var instance = (ITranslator)Activator.CreateInstance(type)!;
+            var instance = (ITranslator) Activator.CreateInstance(type)!;
             Apis.Add(instance);
         }
     }
@@ -43,8 +52,8 @@ public class Translator
 
     internal async Task<string> TranslateText(string text, string role)
     {
-        return await Apis.First(it => it.Name == _config.ApiSelected)
-            .StreamCallWithMessage(text, role, _config, Form.Tsl.Token);
+        var token = Form != null ? Form.Tsl.Token : new CancellationToken();
+        return await CurrentTranslator.StreamCallWithMessage(text, role, _config, token);
     }
 
     internal async Task<Dictionary<string, string>> ProcessText(
@@ -64,7 +73,7 @@ public class Translator
             if (result != string.Empty)
             {
                 Console.WriteLine(result);
-                Form.Invoke(Form.SonProgressUpdate(key, processedMap.Keys.ToList(), keys));
+                Form!.Invoke(Form.SonProgressUpdate(key, processedMap.Keys.ToList(), keys));
                 processedMap[key] = result;
             }
         });
@@ -81,6 +90,7 @@ public class Translator
 
         var tasks = directories.Select(async directory =>
         {
+            Debug.Assert(Form != null, nameof(Form) + " != null");
             Form.Invoke(Form.MainProgressUpdate(0, $@"0/{maximum}"));
             await ProcessDirectory(directory);
             Form.Invoke(Form.MainProgressUpdate(1.0f / maximum, $@"{++i}/{maximum}"));

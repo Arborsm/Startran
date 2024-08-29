@@ -131,9 +131,6 @@
   <data name="modelLabel.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
-  <data name="modelLabel.Text" xml:space="preserve">
-    <value>Model:</value>
-  </data>
   <data name="&gt;&gt;modelLabel.Name" xml:space="preserve">
     <value>modelLabel</value>
   </data>
@@ -158,9 +155,6 @@
   <data name="urlLabel.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
-  <data name="urlLabel.Text" xml:space="preserve">
-    <value>URL:</value>
-  </data>
   <data name="&gt;&gt;urlLabel.Name" xml:space="preserve">
     <value>urlLabel</value>
   </data>
@@ -184,9 +178,6 @@
   </data>
   <data name="apiLabel.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
-  </data>
-  <data name="apiLabel.Text" xml:space="preserve">
-    <value>API:</value>
   </data>
   <data name="&gt;&gt;apiLabel.Name" xml:space="preserve">
     <value>apiLabel</value>
@@ -285,9 +276,6 @@
   <data name="SaveButton.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
-  <data name="SaveButton.Text" xml:space="preserve">
-    <value>Save</value>
-  </data>
   <data name="&gt;&gt;SaveButton.Name" xml:space="preserve">
     <value>SaveButton</value>
   </data>
@@ -308,9 +296,6 @@
   </data>
   <data name="RefreshButton.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
-  </data>
-  <data name="RefreshButton.Text" xml:space="preserve">
-    <value>Refresh</value>
   </data>
   <data name="&gt;&gt;RefreshButton.Name" xml:space="preserve">
     <value>RefreshButton</value>
@@ -336,11 +321,8 @@
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>ApiSetting</value>
-  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>OpenAiSettingForm</value>
+    <value>ApiSettingForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

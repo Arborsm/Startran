@@ -1,4 +1,6 @@
-﻿namespace Startran.Config;
+﻿using Newtonsoft.Json;
+
+namespace Startran.Config;
 
 public class MainConfig
 {
@@ -9,16 +11,8 @@ public class MainConfig
                                          "贴合游戏将英文意译成简体中文并加以润色使其更符合中文的语言环境，" +
                                          "意译输入文本，不要直接使用原参考文本, " +
                                          "符号组合不需要翻译并务必保留在语句对应的位置，以输入格式直接输出结果。";
+    [JsonIgnore]
     public ApiConfig ApiConf { get; set; } = new();
     public bool Debug { get; set; } = false;
     public bool IsBackup { get; set; } = true;
-
-    public class ApiConfig
-    {
-        public string Api { get; set; } = "your-api-key";
-        public string Url { get; set; } = "https://api.openai.com";
-        public string Model { get; set; } = "gpt-3.5-turbo";
-
-        public List<string> Models { get; set; } = new() { "gpt-3.5-turbo", "gpt-4o", "gpt-4o-mini" };
-    }
 }

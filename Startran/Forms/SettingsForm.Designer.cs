@@ -1,4 +1,6 @@
-﻿namespace Startran.Forms;
+﻿using Startran.Lang;
+
+namespace Startran.Forms;
 
 public partial class SettingsForm
 {
@@ -50,7 +52,7 @@ public partial class SettingsForm
         DirectoryPathLabel.Name = "DirectoryPathLabel";
         DirectoryPathLabel.Size = new Size(93, 17);
         DirectoryPathLabel.TabIndex = 0;
-        DirectoryPathLabel.Text = "Directory Path:";
+        DirectoryPathLabel.Text = Strings.DirectoryPath;
         // 
         // DirectoryPathTextBox
         // 
@@ -66,7 +68,7 @@ public partial class SettingsForm
         LangLabel.Name = "LangLabel";
         LangLabel.Size = new Size(68, 17);
         LangLabel.TabIndex = 2;
-        LangLabel.Text = "Language:";
+        LangLabel.Text = Strings.Language;
         // 
         // LangTextBox
         // 
@@ -82,7 +84,7 @@ public partial class SettingsForm
         EnToZhLabel.Name = "EnToZhLabel";
         EnToZhLabel.Size = new Size(148, 17);
         EnToZhLabel.TabIndex = 4;
-        EnToZhLabel.Text = "Translation prompt text:";
+        EnToZhLabel.Text = Strings.TranslationPrompt;
         // 
         // EnToZhRichTextBox
         // 
@@ -99,7 +101,7 @@ public partial class SettingsForm
         ApiSettingLabel.Name = "ApiSettingLabel";
         ApiSettingLabel.Size = new Size(74, 17);
         ApiSettingLabel.TabIndex = 6;
-        ApiSettingLabel.Text = "Api Setting:";
+        ApiSettingLabel.Text = Strings.ApiConfigSetting;
         // 
         // ApiComboBox
         // 
@@ -108,6 +110,7 @@ public partial class SettingsForm
         ApiComboBox.Name = "ApiComboBox";
         ApiComboBox.Size = new Size(326, 25);
         ApiComboBox.TabIndex = 7;
+        ApiComboBox.SelectedIndexChanged += ApiComboBox_SelectedIndexChanged;
         // 
         // ApiSettingButton
         // 
@@ -136,7 +139,7 @@ public partial class SettingsForm
         OtherLabel.Name = "OtherLabel";
         OtherLabel.Size = new Size(44, 17);
         OtherLabel.TabIndex = 10;
-        OtherLabel.Text = "Other:";
+        OtherLabel.Text = Strings.Other;
         // 
         // DebugCheckBox
         // 
@@ -145,7 +148,7 @@ public partial class SettingsForm
         DebugCheckBox.Name = "DebugCheckBox";
         DebugCheckBox.Size = new Size(66, 21);
         DebugCheckBox.TabIndex = 13;
-        DebugCheckBox.Text = "Debug";
+        DebugCheckBox.Text = Strings.Debug;
         DebugCheckBox.UseVisualStyleBackColor = true;
         // 
         // IsBackupCheckBox
@@ -155,7 +158,7 @@ public partial class SettingsForm
         IsBackupCheckBox.Name = "IsBackupCheckBox";
         IsBackupCheckBox.Size = new Size(70, 21);
         IsBackupCheckBox.TabIndex = 14;
-        IsBackupCheckBox.Text = "Backup";
+        IsBackupCheckBox.Text = Strings.Backup;
         IsBackupCheckBox.UseVisualStyleBackColor = true;
         // 
         // SettingsForm
@@ -176,7 +179,7 @@ public partial class SettingsForm
         Controls.Add(DirectoryPathLabel);
         Name = "SettingsForm";
         ShowIcon = false;
-        Text = "Setting";
+        Text = Strings.SettingsButton;
         ResumeLayout(false);
         PerformLayout();
     }

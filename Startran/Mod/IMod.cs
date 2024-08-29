@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using Startran.Config;
 using Startran.Misc;
-using Startran.Trans;
 
 // ReSharper disable InconsistentNaming
 

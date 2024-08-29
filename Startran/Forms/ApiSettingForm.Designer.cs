@@ -1,6 +1,6 @@
 ﻿namespace Startran.Forms
 {
-    partial class OpenAiSettingForm
+    partial class ApiSettingForm
     {
         /// <summary>
         /// Required designer variable.

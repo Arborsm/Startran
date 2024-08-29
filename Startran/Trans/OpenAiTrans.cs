@@ -6,14 +6,12 @@ using Message = OpenAI.Chat.Message;
 
 namespace Startran.Trans;
 
-// ReSharper disable once UnusedMember.Global
-// ReSharper disable once InconsistentNaming
 internal class OpenAITrans : ITranslator
 {
+    public bool NeedApi => true;
     public string Name => "OpenAI";
 
-    public async Task<string> StreamCallWithMessage(string text, string role, MainConfig config,
-        CancellationToken cancellationToken)
+    public async Task<string> StreamCallWithMessage(string text, string role, MainConfig config, CancellationToken cancellationToken)
     {
         using var httpClient = new HttpClient();
         httpClient.Timeout = TimeSpan.FromSeconds(10);
@@ -30,5 +28,15 @@ internal class OpenAITrans : ITranslator
         var response = await client.ChatEndpoint.GetCompletionAsync(chatRequest, cancellationToken);
 
         return response.FirstChoice;
+    }
+
+    public async Task<List<string>> GetSupportModels(MainConfig config)
+    {
+        using var httpClient = new HttpClient();
+        var api = new OpenAIAuthentication(config.ApiConf.Api);
+        var url = new OpenAIClientSettings(config.ApiConf.Url);
+        var client = new OpenAIClient(api, url, httpClient);
+        var models = await client.ModelsEndpoint.GetModelsAsync();
+        return models.Select(it => it.ToString()).ToList();
     }
 }

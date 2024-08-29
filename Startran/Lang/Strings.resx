@@ -120,7 +120,7 @@
   <data name="ApiConfigSetting" xml:space="preserve">
     <value>Api Setting:</value>
   </data>
-  <data name="BeforTrans" xml:space="preserve">
+  <data name="BeforeTrans" xml:space="preserve">
     <value>After setting up, select the 'mods' folder and press process</value>
   </data>
   <data name="DirectoryPath" xml:space="preserve">
@@ -176,5 +176,101 @@
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
+  </data>
+  <data name="TranslationStopped" xml:space="preserve">
+    <value>Translation Stopped</value>
+  </data>
+  <data name="ErrorTranslating" xml:space="preserve">
+    <value>Error while translating</value>
+  </data>
+  <data name="ErrorTranslatingMsg" xml:space="preserve">
+    <value>Unable to get translated result. Please check your settings.\n\n</value>
+  </data>
+  <data name="Copid" xml:space="preserve">
+    <value>Copied: {0}</value>
+  </data>
+  <data name="UnableTrans" xml:space="preserve">
+    <value>Unable to translate</value>
+  </data>
+  <data name="SourceText" xml:space="preserve">
+    <value>Source Text:</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>Main(&amp;A)</value>
+  </data>
+  <data name="AutoCopy" xml:space="preserve">
+    <value>AutoCopy</value>
+  </data>
+  <data name="Proofread" xml:space="preserve">
+    <value>Proofread</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Model:</value>
+  </data>
+  <data name="Url" xml:space="preserve">
+    <value>Url:</value>
+  </data>
+  <data name="ApiSetting" xml:space="preserve">
+    <value>ApiSetting</value>
+  </data>
+  <data name="Api" xml:space="preserve">
+    <value>Api:</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="LangKey" xml:space="preserve">
+    <value>Lang Key</value>
+  </data>
+  <data name="DefaultLang" xml:space="preserve">
+    <value>Default Lang</value>
+  </data>
+  <data name="TargetLang" xml:space="preserve">
+    <value>Target Lang</value>
+  </data>
+  <data name="Symbol" xml:space="preserve">
+    <value>Symbol</value>
+  </data>
+  <data name="ErrorFoldersMsg" xml:space="preserve">
+    <value>Unable to find a mod folder that meets the requirements in the target folder</value>
+  </data>
+  <data name="IfSaveBeforeClose" xml:space="preserve">
+    <value>The changes have not been saved. Would you like to save them?</value>
+  </data>
+  <data name="TooltipMode" xml:space="preserve">
+    <value>Tooltip Mode</value>
+  </data>
+  <data name="ShowFormatError" xml:space="preserve">
+    <value>Only Format Error</value>
+  </data>
+  <data name="ShowHeader" xml:space="preserve">
+    <value>Show Header</value>
+  </data>
+  <data name="AdjustableHeader" xml:space="preserve">
+    <value>Adjustable Header</value>
+  </data>
+  <data name="OEColumn" xml:space="preserve">
+    <value>Odd/Even Column</value>
+  </data>
+  <data name="ShowBorder" xml:space="preserve">
+    <value>Show Border</value>
+  </data>
+  <data name="EnableSorting" xml:space="preserve">
+    <value>Enable Sorting</value>
+  </data>
+  <data name="TranslationPrompt" xml:space="preserve">
+    <value>Translation prompt text:</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Other:</value>
+  </data>
+  <data name="Debug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Backup</value>
   </data>
 </root>

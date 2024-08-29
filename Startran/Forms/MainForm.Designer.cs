@@ -1,4 +1,4 @@
-﻿using Startran.Misc;
+﻿using Startran.Lang;
 
 namespace Startran.Forms
 {
@@ -70,7 +70,7 @@ namespace Startran.Forms
             translateButton.Name = "translateButton";
             translateButton.Size = new Size(73, 25);
             translateButton.TabIndex = 0;
-            translateButton.Text = Lang.Strings.TranslateButton;
+            translateButton.Text = Strings.TranslateButton;
             translateButton.UseVisualStyleBackColor = true;
             translateButton.Click += TranslateButton_Click;
             // 
@@ -81,7 +81,7 @@ namespace Startran.Forms
             processButton.Name = "processButton";
             processButton.Size = new Size(92, 35);
             processButton.TabIndex = 3;
-            processButton.Text = Lang.Strings.ProcessButton;
+            processButton.Text = Strings.ProcessButton;
             processButton.UseVisualStyleBackColor = true;
             processButton.Click += ProcessButton_Click;
             // 
@@ -93,7 +93,7 @@ namespace Startran.Forms
             ModsFolderLabel.Name = "ModsFolderLabel";
             ModsFolderLabel.Size = new Size(86, 17);
             ModsFolderLabel.TabIndex = 7;
-            ModsFolderLabel.Text = "Mods Folder:";
+            ModsFolderLabel.Text = Strings.ModsFolder;
             // 
             // sonLabel
             // 
@@ -103,7 +103,7 @@ namespace Startran.Forms
             sonLabel.Name = "sonLabel";
             sonLabel.Size = new Size(354, 17);
             sonLabel.TabIndex = 8;
-            sonLabel.Text = "After setting up, select the 'mods' folder and press process";
+            sonLabel.Text = Strings.BeforeTrans;
             // 
             // SelectFolder
             // 
@@ -113,7 +113,7 @@ namespace Startran.Forms
             SelectFolder.Name = "SelectFolder";
             SelectFolder.Size = new Size(92, 35);
             SelectFolder.TabIndex = 10;
-            SelectFolder.Text = "Select Folder";
+            SelectFolder.Text = Strings.SelectFolderButton;
             SelectFolder.UseVisualStyleBackColor = true;
             SelectFolder.Click += SelectFolder_Click;
             // 
@@ -125,7 +125,7 @@ namespace Startran.Forms
             TanslateTextLabel.Name = "TanslateTextLabel";
             TanslateTextLabel.Size = new Size(79, 17);
             TanslateTextLabel.TabIndex = 14;
-            TanslateTextLabel.Text = "Source Text:";
+            TanslateTextLabel.Text = Strings.SourceText;
             // 
             // menuStrip1
             // 
@@ -142,7 +142,7 @@ namespace Startran.Forms
             menuStrip1.Size = new Size(72, 25);
             menuStrip1.Stretch = false;
             menuStrip1.TabIndex = 15;
-            menuStrip1.Text = "menuStrip1";
+            //menuStrip1.Text = "menuStrip1";
             // 
             // mainToolStripMenuItem
             // 
@@ -150,13 +150,13 @@ namespace Startran.Forms
             mainToolStripMenuItem.Name = "mainToolStripMenuItem";
             mainToolStripMenuItem.RightToLeft = RightToLeft.Yes;
             mainToolStripMenuItem.Size = new Size(65, 21);
-            mainToolStripMenuItem.Text = "Main(&A)";
+            mainToolStripMenuItem.Text = Strings.Main;
             // 
             // settingToolStripMenuItem
             // 
             settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             settingToolStripMenuItem.Size = new Size(180, 22);
-            settingToolStripMenuItem.Text = "Setting";
+            settingToolStripMenuItem.Text = Strings.SettingsButton;
             settingToolStripMenuItem.Click += SettingToolStripMenuItem_Click;
             // 
             // TabControl
@@ -182,7 +182,7 @@ namespace Startran.Forms
             ProcessPage.Padding = new Padding(3);
             ProcessPage.Size = new Size(368, 159);
             ProcessPage.TabIndex = 0;
-            ProcessPage.Text = "Process";
+            ProcessPage.Text = Strings.ProcessButton;
             ProcessPage.UseVisualStyleBackColor = true;
             // 
             // TranslatePage
@@ -197,7 +197,7 @@ namespace Startran.Forms
             TranslatePage.Padding = new Padding(3);
             TranslatePage.Size = new Size(368, 159);
             TranslatePage.TabIndex = 1;
-            TranslatePage.Text = "Translate";
+            TranslatePage.Text = Strings.TranslateButton;
             TranslatePage.UseVisualStyleBackColor = true;
             // 
             // AutoCopyLabel
@@ -206,7 +206,7 @@ namespace Startran.Forms
             AutoCopyLabel.Name = "AutoCopyLabel";
             AutoCopyLabel.Size = new Size(75, 23);
             AutoCopyLabel.TabIndex = 16;
-            AutoCopyLabel.Text = "AutoCopy";
+            AutoCopyLabel.Text = Strings.AutoCopy;
             // 
             // AutoCopySwitch
             // 
@@ -216,7 +216,7 @@ namespace Startran.Forms
             AutoCopySwitch.Name = "AutoCopySwitch";
             AutoCopySwitch.Size = new Size(42, 25);
             AutoCopySwitch.TabIndex = 15;
-            AutoCopySwitch.Text = "switch1";
+            //AutoCopySwitch.Text = "switch1";
             // 
             // ProofreadButton
             // 
@@ -226,7 +226,7 @@ namespace Startran.Forms
             ProofreadButton.Name = "ProofreadButton";
             ProofreadButton.Size = new Size(92, 35);
             ProofreadButton.TabIndex = 11;
-            ProofreadButton.Text = "Proofread";
+            ProofreadButton.Text = Strings.Proofread;
             ProofreadButton.UseVisualStyleBackColor = true;
             ProofreadButton.Click += ProofreadButton_Click;
             // 
@@ -245,7 +245,7 @@ namespace Startran.Forms
             MaximizeBox = false;
             Name = "MainForm";
             ShowIcon = false;
-            Text = "StarTranslator";
+            Text = Strings.StarTranslator;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             TabControl.ResumeLayout(false);

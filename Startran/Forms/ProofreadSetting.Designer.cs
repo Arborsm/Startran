@@ -1,4 +1,6 @@
 ﻿
+using Startran.Lang;
+
 namespace Startran.Forms
 {
     partial class ProofreadSetting
@@ -61,7 +63,7 @@ namespace Startran.Forms
             isFilter.Location = new Point(200, 0);
             isFilter.Size = new Size(180, 50);
             isFilter.TabIndex = 6;
-            isFilter.Text = "只显示格式错误项";
+            isFilter.Text = Strings.ShowFormatError;
             isFilter.CheckedChanged += IsFilterCheckedChanged;
             // 
             // isVisibleHeader
@@ -71,9 +73,9 @@ namespace Startran.Forms
             isVisibleHeader.BackColor = Color.White;
             isVisibleHeader.Name = "isVisibleHeader";
             isVisibleHeader.Location = new Point(0, 0);
-            isVisibleHeader.Size = new Size(120, 50);
+            isVisibleHeader.Size = new Size(180, 50);
             isVisibleHeader.TabIndex = 5;
-            isVisibleHeader.Text = "显示表头";
+            isVisibleHeader.Text = Strings.ShowHeader;
             isVisibleHeader.CheckedChanged += IsVisibleHeaderCheckedChanged;
             // 
             // isEnableHeaderResizing
@@ -85,7 +87,7 @@ namespace Startran.Forms
             isEnableHeaderResizing.Location = new Point(0, 50);
             isEnableHeaderResizing.Size = new Size(180, 50);
             isEnableHeaderResizing.TabIndex = 4;
-            isEnableHeaderResizing.Text = "手动调整列头宽度";
+            isEnableHeaderResizing.Text = Strings.AdjustableHeader;
             isEnableHeaderResizing.CheckedChanged += IsEnableHeaderResizingCheckedChanged;
             // 
             // isSetRowStyle
@@ -95,9 +97,9 @@ namespace Startran.Forms
             isSetRowStyle.BackColor = Color.White;
             isSetRowStyle.Name = "isSetRowStyle";
             isSetRowStyle.Location = new Point(0, 100);
-            isSetRowStyle.Size = new Size(90, 50);
+            isSetRowStyle.Size = new Size(180, 50);
             isSetRowStyle.TabIndex = 3;
-            isSetRowStyle.Text = "奇偶列";
+            isSetRowStyle.Text = Strings.OEColumn;
             isSetRowStyle.CheckedChanged += IsSetRowStyleCheckedChanged;
             // 
             // isBordered
@@ -107,9 +109,9 @@ namespace Startran.Forms
             isBordered.BackColor = Color.White;
             isBordered.Name = "isBordered";
             isBordered.Location = new Point(0, 150);
-            isBordered.Size = new Size(150, 50);
+            isBordered.Size = new Size(180, 50);
             isBordered.TabIndex = 2;
-            isBordered.Text = "显示列边框";
+            isBordered.Text = Strings.ShowBorder;
             isBordered.CheckedChanged += IsBorderedCheckedChanged;
             // 
             // isOrder
@@ -121,7 +123,7 @@ namespace Startran.Forms
             isOrder.Location = new Point(0, 200);
             isOrder.Size = new Size(120, 50);
             isOrder.TabIndex = 1;
-            isOrder.Text = "启用排列";
+            isOrder.Text = Strings.EnableSorting;
             isOrder.CheckedChanged += IsOrderCheckedChanged;
             // 
             // ProofreadSetting
